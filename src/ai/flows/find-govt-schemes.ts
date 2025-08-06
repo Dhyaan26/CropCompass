@@ -25,7 +25,7 @@ const SchemeSchema = z.object({
     benefits: z.string().describe("The benefits provided by the scheme."),
     documents: z.string().describe("The list of documents required to apply for the scheme."),
     application: z.string().describe("The application process for the scheme."),
-    applicationLink: z.string().url().describe("A direct official URL to the scheme's information or application portal. Should be a valid URL."),
+    applicationLink: z.string().describe("A direct official URL to the scheme's information or application portal. Should be a valid URL."),
 });
 
 const FindGovtSchemesOutputSchema = z.object({
