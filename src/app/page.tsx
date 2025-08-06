@@ -8,8 +8,6 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-const ChatWidget = dynamic(() => import('@/components/chat-widget'), { ssr: false });
-
 export default function Home() {
   const { t } = useTranslation();
 
@@ -32,7 +30,6 @@ export default function Home() {
               </Button>
            </section>
         </main>
-        <ChatWidget />
         <footer className="mt-12 border-t py-6">
             <div className="container mx-auto text-center text-sm text-muted-foreground">
                 <p>&copy; {new Date().getFullYear()} {t('footer.copyright')}</p>

@@ -29,6 +29,10 @@ import {
 import AppHeader from "@/components/header";
 import { useTranslation } from "@/hooks/use-translation";
 import { Button } from "@/components/ui/button";
+import dynamic from 'next/dynamic';
+
+const ChatWidget = dynamic(() => import('@/components/chat-widget'), { ssr: false });
+
 
 export default function DashboardLayout({
   children,
@@ -114,6 +118,7 @@ export default function DashboardLayout({
             </main>
           </SidebarInset>
         </div>
+        <ChatWidget />
       </div>
     </SidebarProvider>
   );
