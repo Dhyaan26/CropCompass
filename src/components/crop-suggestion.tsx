@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -12,15 +13,36 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ListChecks, Lightbulb } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 
+const indianStates = {
+  "Andhra Pradesh": ["Anantapur", "Chittoor", "Guntur", "Krishna", "Visakhapatnam"],
+  "Karnataka": ["Bengaluru Urban", "Belagavi", "Dakshina Kannada", "Mysuru", "Shivamogga"],
+  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
+  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Salem", "Tiruchirappalli"],
+  "Uttar Pradesh": ["Lucknow", "Kanpur", "Ghaziabad", "Agra", "Varanasi"],
+};
+
+const soilTypes = [
+    "Alluvial Soil",
+    "Black Soil (Regur Soil)",
+    "Red and Yellow Soil",
+    "Laterite Soil",
+    "Arid Soil",
+    "Saline Soil",
+    "Peaty Soil",
+    "Forest Soil",
+];
+
+
 const formSchema = z.object({
-  location: z.string().min(2, { message: "Location is required." }),
-  soilType: z.string().min(2, { message: "Soil type is required." }),
+  state: z.string({ required_error: "Please select a state." }),
+  district: z.string({ required_error: "Please select a district." }),
+  soilType: z.string({ required_error: "Please select a soil type." }),
   resources: z.string().min(10, { message: "Please describe your available resources." }),
 });
 
@@ -28,22 +50,26 @@ export default function CropSuggestion() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SuggestOptimalCropsOutput | null>(null);
+  const [selectedState, setSelectedState] = useState<string>("");
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      location: "",
-      soilType: "",
       resources: "",
     },
   });
 
-  const onSubmit: SubmitHandler<SuggestOptimalCropsInput> = async (data) => {
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     setLoading(true);
     setResult(null);
     try {
-      const response = await suggestOptimalCrops(data);
+      const input: SuggestOptimalCropsInput = {
+        location: `${data.district}, ${data.state}`,
+        soilType: data.soilType,
+        resources: data.resources,
+      }
+      const response = await suggestOptimalCrops(input);
       setResult(response);
     } catch (error) {
       console.error("Error getting crop suggestions:", error);
@@ -57,6 +83,12 @@ export default function CropSuggestion() {
     }
   };
 
+  const handleStateChange = (value: string) => {
+    setSelectedState(value);
+    form.setValue("state", value);
+    form.resetField("district");
+  }
+
   return (
     <Card className="shadow-lg w-full max-w-4xl mx-auto">
       <CardHeader>
@@ -66,16 +98,47 @@ export default function CropSuggestion() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <FormField
                 control={form.control}
-                name="location"
+                name="state"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('cropSuggestion.locationLabel')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('cropSuggestion.locationPlaceholder')} {...field} />
-                    </FormControl>
+                    <FormLabel>State</FormLabel>
+                    <Select onValueChange={handleStateChange}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a state" />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {Object.keys(indianStates).map(state => (
+                                <SelectItem key={state} value={state}>{state}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+               <FormField
+                control={form.control}
+                name="district"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>District</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value} disabled={!selectedState}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select a district" />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {selectedState && indianStates[selectedState as keyof typeof indianStates].map(district => (
+                                <SelectItem key={district} value={district}>{district}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -86,9 +149,18 @@ export default function CropSuggestion() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t('cropSuggestion.soilTypeLabel')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('cropSuggestion.soilTypePlaceholder')} {...field} />
-                    </FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder={t('cropSuggestion.soilTypePlaceholder')} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {soilTypes.map(soil => (
+                                <SelectItem key={soil} value={soil}>{soil}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
