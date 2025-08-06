@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import { useState } from "react";
@@ -86,7 +87,7 @@ export default function IrrigationPlan() {
     form.resetField("district");
   }
 
-  const districtsForSelectedState = selectedState && indianStates[selectedState] ? indianStates[selectedState] : [];
+  const districtsForSelectedState = selectedState && indianStates && indianStates[selectedState as keyof typeof indianStates] ? indianStates[selectedState as keyof typeof indianStates] : [];
 
 
   return (
@@ -117,11 +118,11 @@ export default function IrrigationPlan() {
                 name="soilType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('cropSuggestion.soilTypeLabel')}</FormLabel>
+                    <FormLabel>{t('irrigationPlan.soilTypeLabel')}</FormLabel>
                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
-                                <SelectValue placeholder={t('cropSuggestion.soilTypePlaceholder')} />
+                                <SelectValue placeholder={t('irrigationPlan.soilTypePlaceholder')} />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -139,15 +140,15 @@ export default function IrrigationPlan() {
                 name="state"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('cropSuggestion.stateLabel')}</FormLabel>
+                    <FormLabel>{t('irrigationPlan.stateLabel')}</FormLabel>
                     <Select onValueChange={handleStateChange}>
                         <FormControl>
                             <SelectTrigger>
-                                <SelectValue placeholder={t('cropSuggestion.statePlaceholder')} />
+                                <SelectValue placeholder={t('irrigationPlan.statePlaceholder')} />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {Object.keys(indianStates).sort().map(state => (
+                            {indianStates && Object.keys(indianStates).sort().map(state => (
                                 <SelectItem key={state} value={state}>{state}</SelectItem>
                             ))}
                         </SelectContent>
@@ -161,11 +162,11 @@ export default function IrrigationPlan() {
                 name="district"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('cropSuggestion.districtLabel')}</FormLabel>
+                    <FormLabel>{t('irrigationPlan.districtLabel')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value} disabled={!selectedState}>
                         <FormControl>
                             <SelectTrigger>
-                                <SelectValue placeholder={t('cropSuggestion.districtPlaceholder')} />
+                                <SelectValue placeholder={t('irrigationPlan.districtPlaceholder')} />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>

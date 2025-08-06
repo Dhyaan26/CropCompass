@@ -22,7 +22,8 @@
         "dashboard": "Dashboard",
         "aiAssistant": "AI Assistant",
         "pestDetection": "Pest Detection",
-        "marketPrice": "Market Prices"
+        "marketPrice": "Market Prices",
+        "cropDistribution": "Crop Distribution"
     },
     "cropsuggestions": {
         "description": "Get AI-driven crop recommendations based on your farm's conditions.",
@@ -51,6 +52,17 @@
     "marketprice": {
         "description": "Get AI-powered market price estimates for your produce.",
         "description_short": "Get AI price estimates for your produce."
+    },
+    "cropdistribution": {
+        "description": "Visualize the distribution of major crops grown across India.",
+        "description_short": "Visualize crop distribution data for India.",
+        "title": "Crop Distribution in India",
+        "graphTypeLabel": "Graph Type",
+        "graphTypePlaceholder": "Select a graph type",
+        "barChart": "Bar Chart",
+        "pieChart": "Pie Chart",
+        "button": "Generate Graph",
+        "generating": "Generating..."
     },
     "aiassistant": {
         "description": "Ask our AI assistant anything about farming and agriculture."
@@ -88,6 +100,10 @@
         "locationPlaceholder": "E.g., Nashik, Maharashtra",
         "waterAccessLabel": "Water Access",
         "waterAccessPlaceholder": "E.g., Borewell, Canal, Rain-fed",
+        "stateLabel": "State",
+        "statePlaceholder": "Select a state",
+        "districtLabel": "District",
+        "districtPlaceholder": "Select a district",
         "button": "Get Irrigation Plan",
         "calculating": "Calculating...",
         "results": {
@@ -213,6 +229,7 @@
         "govtSchemesError": "Failed to find government schemes. Please try again.",
         "aiInsightsError": "Failed to analyze data. Please try again.",
         "pestDetectionError": "Failed to diagnose plant. Please check the image and try again.",
+        "cropDistributionError": "Failed to get crop distribution data. Please try again.",
         "fileSelectError": "Please select a file to analyze.",
         "locationRequiredError": "Please enter your location.",
         "chatAssistantError": "Failed to get a response from the assistant. Please try again.",

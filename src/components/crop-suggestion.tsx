@@ -46,7 +46,7 @@ export default function CropSuggestion() {
   const [selectedState, setSelectedState] = useState<string>("");
   const { toast } = useToast();
 
-  const indianStates = t('indianStates') as any;
+  const indianStates = t('indianStates');
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -85,7 +85,7 @@ export default function CropSuggestion() {
     form.resetField("district");
   }
 
-  const districtsForSelectedState = selectedState && indianStates[selectedState] ? indianStates[selectedState] : [];
+  const districtsForSelectedState = selectedState && indianStates && indianStates[selectedState as keyof typeof indianStates] ? indianStates[selectedState as keyof typeof indianStates] : [];
 
   return (
     <Card className="shadow-lg w-full max-w-4xl mx-auto">
@@ -110,7 +110,7 @@ export default function CropSuggestion() {
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {Object.keys(indianStates).sort().map(state => (
+                            {indianStates && Object.keys(indianStates).sort().map(state => (
                                 <SelectItem key={state} value={state}>{state}</SelectItem>
                             ))}
                         </SelectContent>

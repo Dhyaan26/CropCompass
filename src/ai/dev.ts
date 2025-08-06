@@ -1,3 +1,4 @@
+
 'use server';
 import { config } from 'dotenv';
 config();
@@ -13,4 +14,5 @@ if (process.env.GENKIT_DEV_SERVER) {
     import('@/ai/flows/chat-assistant.ts');
     import('@/ai/flows/diagnose-plant.ts');
     import('@/ai/flows/get-market-price.ts');
+    import('@/ai/flows/get-crop-distribution.ts');
 }

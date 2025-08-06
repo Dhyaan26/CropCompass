@@ -21,7 +21,8 @@
         "dashboard": "डैशबोर्ड",
         "aiAssistant": "एआई सहायक",
         "pestDetection": "कीट पहचान",
-        "marketPrice": "बाजार मूल्य"
+        "marketPrice": "बाजार मूल्य",
+        "cropDistribution": "फसल वितरण"
     },
     "cropsuggestions": {
         "description": "अपने खेत की स्थितियों के आधार पर AI-संचालित फसल सिफारिशें प्राप्त करें।",
@@ -50,6 +51,17 @@
     "marketprice": {
         "description": "अपनी उपज के लिए एआई-संचालित बाजार मूल्य अनुमान प्राप्त करें।",
         "description_short": "अपनी उपज के लिए एआई मूल्य अनुमान प्राप्त करें।"
+    },
+    "cropdistribution": {
+        "description": "भारत भर में उगाई जाने वाली प्रमुख फसलों के वितरण की कल्पना करें।",
+        "description_short": "भारत के लिए फसल वितरण डेटा की कल्पना करें।",
+        "title": "भारत में फसल वितरण",
+        "graphTypeLabel": "ग्राफ का प्रकार",
+        "graphTypePlaceholder": "एक ग्राफ प्रकार चुनें",
+        "barChart": "बार चार्ट",
+        "pieChart": "पाई चार्ट",
+        "button": "ग्राफ उत्पन्न करें",
+        "generating": "उत्पन्न हो रहा है..."
     },
     "aiassistant": {
         "description": "हमारे AI सहायक से खेती और कृषि के बारे में कुछ भी पूछें।"
@@ -87,6 +99,10 @@
         "locationPlaceholder": "जैसे, नासिक, महाराष्ट्र",
         "waterAccessLabel": "पानी की पहुंच",
         "waterAccessPlaceholder": "जैसे, बोरवेल, नहर, वर्षा-आधारित",
+        "stateLabel": "राज्य",
+        "statePlaceholder": "एक राज्य चुनें",
+        "districtLabel": "ज़िला",
+        "districtPlaceholder": "एक जिला चुनें",
         "button": "सिंचाई योजना प्राप्त करें",
         "calculating": "गणना हो रही है...",
         "results": {
@@ -212,6 +228,7 @@
         "govtSchemesError": "सरकारी योजनाओं को खोजने में विफल। कृपया पुन: प्रयास करें।",
         "aiInsightsError": "डेटा का विश्लेषण करने में विफल। कृपया पुन: प्रयास करें।",
         "pestDetectionError": "पौधे का निदान करने में विफल। कृपया छवि की जांच करें और पुनः प्रयास करें।",
+        "cropDistributionError": "फसल वितरण डेटा प्राप्त करने में विफल। कृपया पुन: प्रयास करें।",
         "fileSelectError": "कृपया विश्लेषण के लिए एक फ़ाइल चुनें।",
         "locationRequiredError": "कृपया अपना स्थान दर्ज करें।",
         "chatAssistantError": "सहायक से प्रतिक्रिया प्राप्त करने में विफल। कृपया पुन: प्रयास करें।",
