@@ -16,7 +16,7 @@ export default function DashboardLayout({
   return (
       <div className="flex min-h-screen flex-col">
         <AppHeader />
-        <main className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
             {children}
         </main>
         <ChatWidget />
