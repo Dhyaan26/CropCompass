@@ -36,14 +36,14 @@ const prompt = ai.definePrompt({
   prompt: `You are an expert agricultural market analyst specializing in Indian markets. Your task is to provide an estimated market price for a given product in a specific location.
 
 Based on the user's query, provide the following information:
-1.  **Average Price**: An estimated average price range for the product in the specified location.
+1.  **Average Price**: An estimated average price range for the product in the specified location, in Indian Rupees (₹). Please provide this as a range per quintal (e.g., "₹2,500 - ₹2,800 per quintal").
 2.  **Market Trends**: A brief analysis of current market trends (e.g., "Prices are currently stable but expected to rise next month due to festival demand.").
 3.  **Price Factors**: Key factors currently influencing the price.
 
 Product: {{{productName}}}
 Location: {{{location}}}
 
-Provide a realistic price estimate based on recent data and market knowledge.`,
+Provide a realistic price estimate based on the most recent, real-time data and market knowledge for Indian markets.`,
 });
 
 const getMarketPriceFlow = ai.defineFlow(
