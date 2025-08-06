@@ -1,57 +1,46 @@
 "use client";
 
-import AiInsights from '@/components/ai-insights';
 import AppHeader from '@/components/header';
-import CropSuggestion from '@/components/crop-suggestion';
-import GovtSchemes from '@/components/govt-schemes';
-import IrrigationPlan from '@/components/irrigation-plan';
-import YieldPrediction from '@/components/yield-prediction';
 import ChatWidget from '@/components/chat-widget';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTranslation } from '@/hooks/use-translation';
-import { BarChartBig, Droplets, Landmark, LineChart, Trees, Bug } from 'lucide-react';
-import PestDiseaseDetection from '@/components/pest-disease-detection';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Home() {
   const { t } = useTranslation();
-
-  const features = [
-      { value: "crop-suggestions", icon: Trees, label: t('tabs.cropSuggestions'), component: <CropSuggestion /> },
-      { value: "irrigation-plan", icon: Droplets, label: t('tabs.irrigationPlan'), component: <IrrigationPlan /> },
-      { value: "yield-prediction", icon: LineChart, label: t('tabs.yieldPrediction'), component: <YieldPrediction /> },
-      { value: "govt-schemes", icon: Landmark, label: t('tabs.govtSchemes'), component: <GovtSchemes /> },
-      { value: "data-insights", icon: BarChartBig, label: t('tabs.dataInsights'), component: <AiInsights /> },
-      { value: "pest-detection", icon: Bug, label: t('tabs.pestDetection'), component: <PestDiseaseDetection /> },
-  ];
 
   return (
     <div className="flex min-h-screen flex-col bg-background/50">
         <AppHeader />
         <main className="container mx-auto flex-grow p-4 md:p-6 lg:p-8">
-            <div className="mb-8 text-center">
-                <h2 className="mb-4 text-4xl font-bold text-primary/90 font-headline md:text-5xl">
-                    {t('home.title')}
-                </h2>
-                <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
-                    {t('home.subtitle')}
-                </p>
-            </div>
-            <Tabs defaultValue="crop-suggestions" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto">
-                    {features.map((feature) => (
-                        <TabsTrigger value={feature.value} key={feature.value} className="flex flex-col sm:flex-row gap-2 h-auto py-2">
-                            <feature.icon className="h-5 w-5" />
-                           <span>{feature.label}</span>
-                        </TabsTrigger>
-                    ))}
-                </TabsList>
+           <section className="text-center">
+             <h1 className="mb-4 text-4xl font-bold text-primary/90 font-headline md:text-6xl">
+                {t('home.title')}
+              </h1>
+              <p className="mx-auto max-w-3xl text-lg text-muted-foreground md:text-xl mb-8">
+                {t('home.subtitle')}
+              </p>
+              <Button asChild size="lg">
+                <Link href="/dashboard">
+                  {t('dashboard.cta')}
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
 
-                 {features.map((feature) => (
-                    <TabsContent value={feature.value} key={feature.value} className="mt-6">
-                        {feature.component}
-                    </TabsContent>
-                ))}
-            </Tabs>
+              <div className="relative mt-12 w-full max-w-5xl mx-auto h-[500px] shadow-2xl rounded-lg overflow-hidden">
+                <Image 
+                    src="https://placehold.co/1200x800.png" 
+                    alt="Farm landscape" 
+                    layout="fill"
+                    objectFit="cover"
+                    data-ai-hint="farm landscape"
+                    className="brightness-90"
+                />
+                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+           </section>
         </main>
         <ChatWidget />
         <footer className="mt-12 border-t py-6">

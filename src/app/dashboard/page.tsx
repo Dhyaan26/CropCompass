@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/use-translation";
-import { BarChartBig, Droplets, Landmark, LineChart, Trees } from "lucide-react";
+import { BarChartBig, Droplets, Landmark, LineChart, Trees, Bug } from "lucide-react";
 import Link from "next/link";
 
 
@@ -15,6 +15,7 @@ export default function DashboardPage() {
         { href: "/dashboard/yield-prediction", icon: LineChart, text: t('tabs.yieldPrediction') },
         { href: "/dashboard/govt-schemes", icon: Landmark, text: t('tabs.govtSchemes') },
         { href: "/dashboard/farm-data-analytics", icon: BarChartBig, text: t('tabs.dataInsights') },
+        { href: "/dashboard/pest-disease-detection", icon: Bug, text: t('tabs.pestDetection') },
     ];
 
     return (

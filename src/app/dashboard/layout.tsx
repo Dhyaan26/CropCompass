@@ -13,7 +13,7 @@ import {
     SidebarFooter,
     SidebarInset,
 } from "@/components/ui/sidebar"
-import { BarChartBig, Droplets, Home, Landmark, Leaf, LineChart, Trees, Download } from "lucide-react";
+import { BarChartBig, Droplets, Home, Landmark, Leaf, LineChart, Trees, Download, Bug } from "lucide-react";
 import LanguageSwitcher from "@/components/language-switcher";
 import { useTranslation } from "@/hooks/use-translation";
 import { usePathname } from "next/navigation";
@@ -45,6 +45,7 @@ export default function DashboardLayout({
         { href: "/dashboard/yield-prediction", icon: LineChart, label: t('tabs.yieldPrediction') },
         { href: "/dashboard/govt-schemes", icon: Landmark, label: t('tabs.govtSchemes') },
         { href: "/dashboard/farm-data-analytics", icon: BarChartBig, label: t('tabs.dataInsights') },
+        { href: "/dashboard/pest-disease-detection", icon: Bug, label: t('tabs.pestDetection') },
     ];
 
     return (
