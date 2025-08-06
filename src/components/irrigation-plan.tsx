@@ -19,9 +19,20 @@ import { Loader2, CalendarClock, Recycle } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+const soilTypes = [
+    "Alluvial Soil",
+    "Black Soil (Regur Soil)",
+    "Red and Yellow Soil",
+    "Laterite Soil",
+    "Arid Soil",
+    "Saline Soil",
+    "Peaty Soil",
+    "Forest Soil",
+];
+
 const formSchema = z.object({
   cropType: z.string().min(2, { message: "Crop type is required." }),
-  soilType: z.string().min(2, { message: "Soil type is required." }),
+  soilType: z.string({ required_error: "Please select a soil type." }),
   state: z.string({ required_error: "Please select a state." }),
   district: z.string({ required_error: "Please select a district." }),
   waterAccess: z.string().min(5, { message: "Describe your water access." }),
@@ -40,7 +51,6 @@ export default function IrrigationPlan() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       cropType: "",
-      soilType: "",
       waterAccess: "",
     },
   });
@@ -106,10 +116,19 @@ export default function IrrigationPlan() {
                 name="soilType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('irrigationPlan.soilTypeLabel')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('irrigationPlan.soilTypePlaceholder')} {...field} />
-                    </FormControl>
+                    <FormLabel>{t('cropSuggestion.soilTypeLabel')}</FormLabel>
+                     <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder={t('cropSuggestion.soilTypePlaceholder')} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {soilTypes.map(soil => (
+                                <SelectItem key={soil} value={soil}>{soil}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
