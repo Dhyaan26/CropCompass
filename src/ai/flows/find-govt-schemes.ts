@@ -14,6 +14,7 @@ import {z} from 'genkit';
 const FindGovtSchemesInputSchema = z.object({
   location: z.string().describe('The location of the user (e.g., District, State).'),
   farmerCategory: z.string().describe('The category of the farmer (e.g., Small, Marginal, Large).'),
+  language: z.string().describe('The language for the response (e.g., "en", "hi", "kn").'),
 });
 export type FindGovtSchemesInput = z.infer<typeof FindGovtSchemesInputSchema>;
 
@@ -39,6 +40,8 @@ const prompt = ai.definePrompt({
   input: {schema: FindGovtSchemesInputSchema},
   output: {schema: FindGovtSchemesOutputSchema},
   prompt: `You are an expert advisor on Indian government schemes for farmers. Based on the user's location and farmer category, identify relevant central and state-level government schemes. Provide details for each scheme including eligibility, benefits, required documents, and the application process.
+
+Provide the entire response in the following language: {{{language}}}.
 
 Location: {{{location}}}
 Farmer Category: {{{farmerCategory}}}

@@ -40,7 +40,7 @@ const formSchema = z.object({
 });
 
 export default function CropSuggestion() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SuggestOptimalCropsOutput | null>(null);
   const [selectedState, setSelectedState] = useState<string>("");
@@ -63,6 +63,7 @@ export default function CropSuggestion() {
         location: `${data.district}, ${data.state}`,
         soilType: data.soilType,
         resources: data.resources,
+        language: language,
       }
       const response = await suggestOptimalCrops(input);
       setResult(response);
@@ -131,7 +132,7 @@ export default function CropSuggestion() {
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {districtsForSelectedState.sort().map((district: string) => (
+                            {districtsForSelectedState && districtsForSelectedState.sort().map((district: string) => (
                                 <SelectItem key={district} value={district}>{district}</SelectItem>
                             ))}
                         </SelectContent>

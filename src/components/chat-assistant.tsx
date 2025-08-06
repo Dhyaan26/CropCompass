@@ -28,7 +28,7 @@ type Message = {
 };
 
 export default function ChatAssistant() {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
     const [loading, setLoading] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const { toast } = useToast();
@@ -41,14 +41,18 @@ export default function ChatAssistant() {
         },
     });
 
-    const onSubmit: SubmitHandler<ChatAssistantInput> = async (data) => {
+    const onSubmit: SubmitHandler<Omit<ChatAssistantInput, 'language'>> = async (data) => {
         setLoading(true);
         const userMessage: Message = { role: 'user', content: data.message };
         setMessages((prev) => [...prev, userMessage]);
         form.reset();
 
         try {
-            const response = await chatAssistant(data);
+            const input: ChatAssistantInput = {
+                ...data,
+                language,
+            };
+            const response = await chatAssistant(input);
             const assistantMessage: Message = { role: 'assistant', content: response.response };
             setMessages((prev) => [...prev, assistantMessage]);
         } catch (error) {

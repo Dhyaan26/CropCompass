@@ -16,6 +16,7 @@ const PredictYieldInputSchema = z.object({
   soilType: z.string().describe('The type of soil the crop is grown in.'),
   season: z.string().describe('The season in which the crop is being grown (e.g., Kharif, Rabi, Zaid).'),
   location: z.string().describe('The location where the crop is being grown.'),
+  language: z.string().describe('The language for the response (e.g., "en", "hi", "kn").'),
 });
 export type PredictYieldInput = z.infer<typeof PredictYieldInputSchema>;
 
@@ -36,6 +37,8 @@ const prompt = ai.definePrompt({
   input: {schema: PredictYieldInputSchema},
   output: {schema: PredictYieldOutputSchema},
   prompt: `You are an expert agricultural advisor. Based on the crop type, soil conditions, season, location, and a 6-month weather forecast for the area, estimate the potential yield in quintals per acre.
+
+Provide the entire response in the following language: {{{language}}}.
 
 Your response must include:
 1.  A summary of the 6-month weather report for the given location.

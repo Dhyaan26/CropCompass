@@ -26,7 +26,7 @@ const formSchema = z.object({
 });
 
 export default function YieldPrediction() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PredictYieldOutput | null>(null);
   const { toast } = useToast();
@@ -40,11 +40,15 @@ export default function YieldPrediction() {
     },
   });
 
-  const onSubmit: SubmitHandler<PredictYieldInput> = async (data) => {
+  const onSubmit: SubmitHandler<Omit<PredictYieldInput, 'language'>> = async (data) => {
     setLoading(true);
     setResult(null);
     try {
-      const response = await predictYield(data);
+        const input: PredictYieldInput = {
+            ...data,
+            language,
+        };
+      const response = await predictYield(input);
       setResult(response);
     } catch (error) {
       console.error("Error predicting yield:", error);

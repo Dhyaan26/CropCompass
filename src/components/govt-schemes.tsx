@@ -25,7 +25,7 @@ const formSchema = z.object({
 });
 
 export default function GovtSchemes() {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<FindGovtSchemesOutput | null>(null);
     const { toast } = useToast();
@@ -37,11 +37,15 @@ export default function GovtSchemes() {
         },
     });
 
-    const onSubmit: SubmitHandler<FindGovtSchemesInput> = async (data) => {
+    const onSubmit: SubmitHandler<Omit<FindGovtSchemesInput, 'language'>> = async (data) => {
         setLoading(true);
         setResult(null);
         try {
-            const response = await findGovtSchemes(data);
+            const input: FindGovtSchemesInput = {
+                ...data,
+                language,
+            };
+            const response = await findGovtSchemes(input);
             setResult(response);
         } catch (error) {
             console.error("Error finding schemes:", error);

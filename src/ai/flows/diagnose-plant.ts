@@ -19,6 +19,7 @@ const DiagnosePlantInputSchema = z.object({
     ),
   description: z.string().describe('The description of the plant problem.'),
   location: z.string().describe('The user\'s current location (e.g., city, district) for finding nearby stores.'),
+  language: z.string().describe('The language for the response (e.g., "en", "hi", "kn").'),
 });
 export type DiagnosePlantInput = z.infer<typeof DiagnosePlantInputSchema>;
 
@@ -61,6 +62,8 @@ const prompt = ai.definePrompt({
   input: {schema: DiagnosePlantInputSchema},
   output: {schema: DiagnosePlantOutputSchema},
   prompt: `You are an expert plant pathologist and botanist specializing in Indian agriculture. Your task is to analyze an image of a plant, a user-provided description, and their location to identify the plant, diagnose any diseases or pests, and recommend treatments.
+
+Provide the entire response in the following language: {{{language}}}.
 
 Analyze the provided image and description.
 1.  **Identification**: First, confirm if the image contains a plant. If it does, identify its common and Latin names.

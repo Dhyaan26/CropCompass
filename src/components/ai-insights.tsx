@@ -14,7 +14,7 @@ import {
 import { useTranslation } from '@/hooks/use-translation';
 
 export default function AiInsights() {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
     const [file, setFile] = useState<File | null>(null);
     const [fileDataUri, setFileDataUri] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -53,6 +53,7 @@ export default function AiInsights() {
             const input: AnalyzeFarmDataInput = {
                 fileName: file.name,
                 fileDataUri: fileDataUri,
+                language,
             };
             const response = await analyzeFarmData(input);
             setResult(response);

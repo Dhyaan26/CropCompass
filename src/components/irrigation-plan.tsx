@@ -39,7 +39,7 @@ const formSchema = z.object({
 });
 
 export default function IrrigationPlan() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<CalculateIrrigationScheduleOutput | null>(null);
   const [selectedState, setSelectedState] = useState<string>("");
@@ -64,6 +64,7 @@ export default function IrrigationPlan() {
         cropType: data.cropType,
         soilType: data.soilType,
         waterAccess: data.waterAccess,
+        language,
       }
       const response = await calculateIrrigationSchedule(input);
       setResult(response);

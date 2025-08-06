@@ -20,7 +20,7 @@ import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 
 export default function PestDiseaseDetection() {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [description, setDescription] = useState("");
@@ -122,6 +122,7 @@ export default function PestDiseaseDetection() {
                 description: description,
                 photoDataUri: previewUrl,
                 location: location,
+                language: language,
             };
             const response = await diagnosePlant(input);
             setResult(response);

@@ -15,6 +15,7 @@ const CalculateIrrigationScheduleInputSchema = z.object({
   soilType: z.string().describe('The type of soil the crop is grown in.'),
   location: z.string().describe('The location where the crop is being grown.'),
   waterAccess: z.string().describe('Water access description'),
+  language: z.string().describe('The language for the response (e.g., "en", "hi", "kn").'),
 });
 export type CalculateIrrigationScheduleInput = z.infer<typeof CalculateIrrigationScheduleInputSchema>;
 
@@ -33,6 +34,8 @@ const prompt = ai.definePrompt({
   input: {schema: CalculateIrrigationScheduleInputSchema},
   output: {schema: CalculateIrrigationScheduleOutputSchema},
   prompt: `You are an expert agricultural advisor specializing in irrigation. Based on the crop type, soil conditions, location, and weather forecasts, create an irrigation schedule.  Also suggest water conservation techniques.
+
+Provide the entire response in the following language: {{{language}}}.
 
 Crop Type: {{{cropType}}}
 Soil Type: {{{soilType}}}

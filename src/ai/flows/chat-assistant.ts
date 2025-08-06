@@ -12,6 +12,7 @@ import {z} from 'genkit';
 
 const ChatAssistantInputSchema = z.object({
   message: z.string().describe("The user's message to the assistant."),
+  language: z.string().describe('The language for the response (e.g., "en", "hi", "kn").'),
 });
 export type ChatAssistantInput = z.infer<typeof ChatAssistantInputSchema>;
 
@@ -29,6 +30,8 @@ const prompt = ai.definePrompt({
   input: {schema: ChatAssistantInputSchema},
   output: {schema: ChatAssistantOutputSchema},
   prompt: `You are a helpful AI assistant for farmers called CropCompass. Your goal is to answer questions and provide information related to farming, agriculture, crop management, and government schemes. Be friendly, knowledgeable, and provide concise, actionable advice.
+
+Provide the entire response in the following language: {{{language}}}.
 
 User's query: {{{message}}}`,
 });

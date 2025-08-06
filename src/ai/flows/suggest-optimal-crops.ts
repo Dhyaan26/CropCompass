@@ -15,6 +15,7 @@ const SuggestOptimalCropsInputSchema = z.object({
   location: z.string().describe('The location of the farm.'),
   soilType: z.string().describe('The type of soil on the farm.'),
   resources: z.string().describe('The available resources for the farm.'),
+  language: z.string().describe('The language for the response (e.g., "en", "hi", "kn").'),
 });
 export type SuggestOptimalCropsInput = z.infer<typeof SuggestOptimalCropsInputSchema>;
 
@@ -41,6 +42,8 @@ Soil Type: {{{soilType}}}
 Resources: {{{resources}}}
 
 Based on this information, recommend the optimal crops to plant and provide a reasoning for your recommendations.
+
+Provide the entire response in the following language: {{{language}}}.
 
 Format your response as follows:
 

@@ -25,7 +25,7 @@ const formSchema = z.object({
 });
 
 export default function MarketPrice() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GetMarketPriceOutput | null>(null);
   const { toast } = useToast();
@@ -38,11 +38,15 @@ export default function MarketPrice() {
     },
   });
 
-  const onSubmit: SubmitHandler<GetMarketPriceInput> = async (data) => {
+  const onSubmit: SubmitHandler<Omit<GetMarketPriceInput, 'language'>> = async (data) => {
     setLoading(true);
     setResult(null);
     try {
-      const response = await getMarketPrice(data);
+        const input: GetMarketPriceInput = {
+            ...data,
+            language,
+        };
+      const response = await getMarketPrice(input);
       setResult(response);
     } catch (error) {
       console.error("Error getting market price:", error);

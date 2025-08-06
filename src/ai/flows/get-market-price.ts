@@ -14,6 +14,7 @@ import {z} from 'genkit';
 const GetMarketPriceInputSchema = z.object({
   productName: z.string().describe('The name of the agricultural product.'),
   location: z.string().describe('The location (e.g., city, state) to get the price for.'),
+  language: z.string().describe('The language for the response (e.g., "en", "hi", "kn").'),
 });
 export type GetMarketPriceInput = z.infer<typeof GetMarketPriceInputSchema>;
 
@@ -41,6 +42,8 @@ const prompt = ai.definePrompt({
   input: {schema: GetMarketPriceInputSchema},
   output: {schema: GetMarketPriceOutputSchema},
   prompt: `You are an expert agricultural market analyst specializing in Indian markets. Your task is to provide a real-time market price for a given product in a specific location by referencing data from the local Agricultural Produce Market Committee (APMC).
+
+Provide the entire response in the following language: {{{language}}}.
 
 Based on the user's query, provide the following information:
 1.  **Average Price**: A real-time average price range for the product in the specified APMC location, in Indian Rupees (₹). Please provide this as a range per quintal (e.g., "₹2,500 - ₹2,800 per quintal").
