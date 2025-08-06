@@ -201,7 +201,8 @@
             "application": "How to Apply",
             "noSchemesFound": "No specific {{type}} schemes found for the provided details. Try broadening your search.",
             "centralSchemes": "Central Schemes",
-            "stateSchemes": "State Schemes"
+            "stateSchemes": "State Schemes",
+            "applyLink": "More Info / Apply"
         }
     },
     "aiInsights": {

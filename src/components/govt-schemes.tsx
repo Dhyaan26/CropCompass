@@ -14,11 +14,12 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { ExternalLink, Loader2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTranslation } from "@/hooks/use-translation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import Link from "next/link";
 
 
 type Scheme = {
@@ -27,6 +28,7 @@ type Scheme = {
     benefits: string;
     documents: string;
     application: string;
+    applicationLink: string;
 };
 
 const formSchema = z.object({
@@ -102,6 +104,12 @@ export default function GovtSchemes() {
                                 <h4 className="font-semibold text-primary">{t('govtSchemes.results.application')}</h4>
                                 <p className="text-muted-foreground">{scheme.application}</p>
                             </div>
+                            <Button asChild size="sm">
+                                <Link href={scheme.applicationLink} target="_blank" rel="noopener noreferrer">
+                                   {t('govtSchemes.results.applyLink')}
+                                    <ExternalLink className="ml-2 h-4 w-4" />
+                                </Link>
+                            </Button>
                         </AccordionContent>
                     </AccordionItem>
                 ))}
@@ -145,8 +153,8 @@ export default function GovtSchemes() {
                                             </SelectTrigger>
                                         </FormControl>
                                         <SelectContent>
-                                            <SelectItem value="Small Farmer">{t('govtSchemes.smallFarmer')}</SelectItem>
                                             <SelectItem value="Marginal Farmer">{t('govtSchemes.marginalFarmer')}</SelectItem>
+                                            <SelectItem value="Small Farmer">{t('govtSchemes.smallFarmer')}</SelectItem>
                                             <SelectItem value="Large Farmer">{t('govtSchemes.largeFarmer')}</SelectItem>
                                         </SelectContent>
                                     </Select>
