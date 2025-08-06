@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI agent for getting market prices of agricultural products.
@@ -25,7 +26,7 @@ const GetMarketPriceOutputSchema = z.object({
   liveMarketLink: z.string().describe("A Google search URL for the APMC market price of the product in the specified location. The URL should be in the format: `https://www.google.com/search?q=APMC+<LOCATION>+<PRODUCT>+price`"),
   googleMapsSearchLink: z.string().describe("A Google Maps URL that searches for 'agricultural supply stores' in the user's provided location. The URL should be in the format: `https://www.google.com/maps/search/?api=1&query=agricultural+supply+stores+in+<LOCATION>`."),
   ecommerceLinks: z.array(z.object({
-    siteName: z.string().describe("The name of the e-commerce website (e.g., 'Amazon', 'Flipkart', 'BigBasket')."),
+    siteName: z.string().describe("The name of the e-commerce website (e.g., 'Amazon', 'Flipkart', 'BigBasket', 'Zepto', 'Blinkit')."),
     searchUrl: z.string().describe("A URL to search for the product on that e-commerce site."),
   })).describe("A list of search links for the product on popular Indian e-commerce sites."),
 });
@@ -47,7 +48,7 @@ Based on the user's query, provide the following information:
 3.  **Price Factors**: Key factors currently influencing the price.
 4.  **Live Market Link**: Generate a Google search URL to find the live APMC market price for the specified product and location.
 5.  **Nearby Stores Link**: Generate a Google Maps search URL for "agricultural supply stores" in the user's location.
-6.  **E-commerce Links**: Generate product search URLs for at least 3 major Indian e-commerce websites (like Amazon.in, Flipkart, BigBasket) where the user might be able to buy the product.
+6.  **E-commerce Links**: Generate product search URLs for at least 3 major Indian e-commerce websites (like Amazon.in, Flipkart, BigBasket, Zepto, Blinkit) where the user might be able to buy the product.
 
 Product: {{{productName}}}
 Location: {{{location}}}
