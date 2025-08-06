@@ -111,6 +111,7 @@
         "predicting": "Predicting...",
         "results": {
             "predictedYield": "Predicted Yield",
+            "weatherReport": "6-Month Weather Forecast",
             "influencingFactors": "Influencing Factors",
             "recommendations": "Recommendations for Improvement"
         }

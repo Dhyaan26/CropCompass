@@ -21,8 +21,9 @@ export type PredictYieldInput = z.infer<typeof PredictYieldInputSchema>;
 
 const PredictYieldOutputSchema = z.object({
   predictedYield: z.string().describe('The estimated yield for the crop in quintals per acre.'),
-  factors: z.string().describe('The key factors influencing the predicted yield.'),
-  recommendations: z.string().describe('Recommendations to improve the yield.'),
+  weatherReport: z.string().describe("A 6-month weather report summary for the location."),
+  factors: z.string().describe('The key factors influencing the predicted yield, including weather.'),
+  recommendations: z.string().describe('Recommendations to improve the yield based on all factors.'),
 });
 export type PredictYieldOutput = z.infer<typeof PredictYieldOutputSchema>;
 
@@ -34,7 +35,13 @@ const prompt = ai.definePrompt({
   name: 'predictYieldPrompt',
   input: {schema: PredictYieldInputSchema},
   output: {schema: PredictYieldOutputSchema},
-  prompt: `You are an expert agricultural advisor. Based on the crop type, soil conditions, season, and location, estimate the potential yield in quintals per acre. Also, describe the key factors that would influence this yield and provide actionable recommendations to improve it.
+  prompt: `You are an expert agricultural advisor. Based on the crop type, soil conditions, season, location, and a 6-month weather forecast for the area, estimate the potential yield in quintals per acre.
+
+Your response must include:
+1.  A summary of the 6-month weather report for the given location.
+2.  The predicted yield.
+3.  A description of the key factors that would influence this yield, explicitly including the weather patterns.
+4.  Actionable recommendations to improve the yield.
 
 Crop Type: {{{cropType}}}
 Soil Type: {{{soilType}}}

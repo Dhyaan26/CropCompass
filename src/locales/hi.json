@@ -110,6 +110,7 @@
         "predicting": "भविष्यवाणी हो रही है...",
         "results": {
             "predictedYield": "अनुमानित उपज",
+            "weatherReport": "6 महीने का मौसम पूर्वानुमान",
             "influencingFactors": "प्रभावित करने वाले कारक",
             "recommendations": "सुधार के लिए सिफारिशें"
         }

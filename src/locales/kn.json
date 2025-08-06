@@ -110,6 +110,7 @@
         "predicting": "ಊಹಿಸಲಾಗುತ್ತಿದೆ...",
         "results": {
             "predictedYield": "ಊಹಿಸಲಾದ ಇಳುವರಿ",
+            "weatherReport": "6-ತಿಂಗಳ ಹವಾಮಾನ ಮುನ್ಸೂಚನೆ",
             "influencingFactors": "ಪ್ರಭಾವ ಬೀರುವ ಅಂಶಗಳು",
             "recommendations": "ಸುಧಾರಣೆಗಾಗಿ ಶಿಫಾರಸುಗಳು"
         }

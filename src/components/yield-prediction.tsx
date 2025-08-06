@@ -14,7 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, TrendingUp, Lightbulb, CheckCircle } from "lucide-react";
+import { Loader2, TrendingUp, Lightbulb, CheckCircle, Cloudy } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useTranslation } from "@/hooks/use-translation";
 
@@ -154,6 +154,18 @@ export default function YieldPrediction() {
                   <CardDescription>{result.predictedYield}</CardDescription>
                 </div>
               </CardHeader>
+            </Card>
+
+            <Card>
+              <CardHeader className="flex flex-row items-center gap-4">
+                <Cloudy className="h-8 w-8 text-accent" />
+                <div>
+                  <CardTitle>{t('yieldPrediction.results.weatherReport')}</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="whitespace-pre-wrap text-muted-foreground">{result.weatherReport}</p>
+              </CardContent>
             </Card>
             
             <Card>
