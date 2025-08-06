@@ -81,7 +81,7 @@ export default function PestDiseaseDetection() {
                 <CardDescription className="text-center">{t('pestDetection.description')}</CardDescription>
             </CardHeader>
             <CardContent>
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-8 items-start">
                      <div className="flex flex-col gap-4">
                         <div 
                             className="relative flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-border p-8 h-64 cursor-pointer"
