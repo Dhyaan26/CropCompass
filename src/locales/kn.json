@@ -86,7 +86,9 @@
             "recommendedCrops": "ಶಿಫಾರಸು ಮಾಡಲಾದ ಬೆಳೆಗಳು",
             "recommendedCropsDesc": "ನಿಮ್ಮ ಇನ್‌ಪುಟ್ ಆಧರಿಸಿ, ಇಲ್ಲಿ ಅತ್ಯಂತ ಸೂಕ್ತವಾದ ಬೆಳೆಗಳು.",
             "aiReasoning": "AI ತಾರ್ಕಿಕತೆ",
-            "aiReasoningDesc": "ಈ ಬೆಳೆಗಳನ್ನು ಏಕೆ ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ ಎಂಬುದು ಇಲ್ಲಿದೆ."
+            "aiReasoningDesc": "ಈ ಬೆಳೆಗಳನ್ನು ಏಕೆ ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ ಎಂಬುದು ಇಲ್ಲಿದೆ.",
+            "fertilizerTitle": "ಗೊಬ್ಬರ ಶಿಫಾರಸುಗಳು",
+            "fertilizerDesc": "ಸೂಚಿಸಲಾದ ಬೆಳೆಗಳಿಗೆ ಸೂಕ್ತವಾದ ಗೊಬ್ಬರಗಳು."
         }
     },
     "irrigationPlan": {

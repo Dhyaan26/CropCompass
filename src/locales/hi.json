@@ -86,7 +86,9 @@
             "recommendedCrops": "अनुशंसित फसलें",
             "recommendedCropsDesc": "आपके इनपुट के आधार पर, यहाँ सबसे उपयुक्त फसलें हैं।",
             "aiReasoning": "एआई तर्क",
-            "aiReasoningDesc": "यहाँ बताया गया है कि इन फसलों की सिफारिश क्यों की गई।"
+            "aiReasoningDesc": "यहाँ बताया गया है कि इन फसलों की सिफारिश क्यों की गई।",
+            "fertilizerTitle": "उर्वरक सिफारिशें",
+            "fertilizerDesc": "सुझाई गई फसलों के लिए उपयुक्त उर्वरक।"
         }
     },
     "irrigationPlan": {

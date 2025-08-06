@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -19,9 +20,15 @@ const SuggestOptimalCropsInputSchema = z.object({
 });
 export type SuggestOptimalCropsInput = z.infer<typeof SuggestOptimalCropsInputSchema>;
 
+const FertilizerRecommendationSchema = z.object({
+    name: z.string().describe('The name of the recommended fertilizer (e.g., "Urea", "DAP").'),
+    reason: z.string().describe('The reason for recommending this fertilizer for the suggested crops.'),
+});
+
 const SuggestOptimalCropsOutputSchema = z.object({
   crops: z.array(z.string()).describe('The recommended crops for the farm.'),
   reasoning: z.string().describe('The reasoning behind the crop recommendations.'),
+  fertilizers: z.array(FertilizerRecommendationSchema).describe('A list of suitable fertilizers for the recommended crops.'),
 });
 export type SuggestOptimalCropsOutput = z.infer<typeof SuggestOptimalCropsOutputSchema>;
 
@@ -41,14 +48,11 @@ Location: {{{location}}}
 Soil Type: {{{soilType}}}
 Resources: {{{resources}}}
 
-Based on this information, recommend the optimal crops to plant and provide a reasoning for your recommendations.
+Based on this information, recommend the optimal crops to plant, provide a reasoning for your recommendations, and suggest suitable fertilizers for these crops.
 
 Provide the entire response in the following language: {{{language}}}.
 
-Format your response as follows:
-
-Crops: [crop1, crop2, crop3]
-Reasoning: The reasoning behind the crop recommendations.`,
+Format your response as a JSON object with 'crops', 'reasoning', and 'fertilizers' keys.`,
 });
 
 const suggestOptimalCropsFlow = ai.defineFlow(

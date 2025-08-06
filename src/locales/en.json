@@ -57,7 +57,7 @@
         "description": "Visualize the distribution of major crops grown across India.",
         "description_short": "Visualize crop distribution data for India.",
         "title": "Crop Distribution",
-        "chartTypeLabel": "Chart Type",
+        "graphTypeLabel": "Chart Type",
         "graphTypePlaceholder": "Select a chart type",
         "statePlaceholder": "Select a state (or All India)",
         "barChart": "Bar Chart",
@@ -87,7 +87,9 @@
             "recommendedCrops": "Recommended Crops",
             "recommendedCropsDesc": "Based on your input, here are the most suitable crops.",
             "aiReasoning": "AI Reasoning",
-            "aiReasoningDesc": "Here's why these crops were recommended."
+            "aiReasoningDesc": "Here's why these crops were recommended.",
+            "fertilizerTitle": "Fertilizer Recommendations",
+            "fertilizerDesc": "Suitable fertilizers for the suggested crops."
         }
     },
     "irrigationPlan": {

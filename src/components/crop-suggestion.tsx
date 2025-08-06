@@ -16,7 +16,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, ListChecks, Lightbulb } from "lucide-react";
+import { Loader2, ListChecks, Lightbulb, Package } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 
 
@@ -223,6 +223,28 @@ export default function CropSuggestion() {
                 <p className="text-muted-foreground">{result.reasoning}</p>
               </CardContent>
             </Card>
+            
+            {result.fertilizers && result.fertilizers.length > 0 && (
+                <Card>
+                    <CardHeader className="flex flex-row items-center gap-4">
+                        <Package className="h-8 w-8 text-accent" />
+                        <div>
+                        <CardTitle>{t('cropSuggestion.results.fertilizerTitle')}</CardTitle>
+                        <CardDescription>{t('cropSuggestion.results.fertilizerDesc')}</CardDescription>
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        <ul className="space-y-4">
+                            {result.fertilizers.map((fertilizer, index) => (
+                                <li key={index} className="p-4 border rounded-lg">
+                                    <h4 className="font-semibold">{fertilizer.name}</h4>
+                                    <p className="text-sm text-muted-foreground">{fertilizer.reason}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    </CardContent>
+                </Card>
+            )}
           </div>
         )}
       </CardContent>
