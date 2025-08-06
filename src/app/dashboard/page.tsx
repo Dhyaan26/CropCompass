@@ -14,7 +14,7 @@ export default function DashboardPage() {
         { href: "/dashboard/irrigation-plan", icon: Droplets, text: t('tabs.irrigationPlan') },
         { href: "/dashboard/yield-prediction", icon: LineChart, text: t('tabs.yieldPrediction') },
         { href: "/dashboard/govt-schemes", icon: Landmark, text: t('tabs.govtSchemes') },
-        { href: "/dashboard/data-insights", icon: BarChartBig, text: t('tabs.dataInsights') },
+        { href: "/dashboard/farm-data-analytics", icon: BarChartBig, text: t('tabs.dataInsights') },
     ];
 
     return (
