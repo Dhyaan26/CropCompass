@@ -22,11 +22,8 @@ export default function DashboardPage() {
         <div>
             <div className="mb-8 text-center">
                 <h2 className="mb-2 text-3xl font-bold text-primary/90 font-headline md:text-4xl">
-                    {t('home.title')}
+                    {t('dashboard.title')}
                 </h2>
-                <p className="mx-auto max-w-3xl text-muted-foreground">
-                    {t('home.subtitle')}
-                </p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
