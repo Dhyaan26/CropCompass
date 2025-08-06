@@ -15,8 +15,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, IndianRupee, TrendingUp, Lightbulb } from "lucide-react";
+import { Loader2, IndianRupee, TrendingUp, Lightbulb, ExternalLink, ShoppingCart } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
+import Link from "next/link";
 
 const formSchema = z.object({
   productName: z.string().min(2, { message: "Product name is required." }),
@@ -139,6 +140,44 @@ export default function MarketPrice() {
               <CardContent>
                 <p className="text-muted-foreground">{result.priceFactors}</p>
               </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader className="flex flex-row items-center gap-4">
+                    <ExternalLink className="h-8 w-8 text-accent" />
+                    <div>
+                    <CardTitle>Live Market Data</CardTitle>
+                    <CardDescription>Check live prices from APMC markets.</CardDescription>
+                    </div>
+                </CardHeader>
+                <CardContent>
+                    <Button asChild>
+                        <Link href={result.liveMarketLink} target="_blank" rel="noopener noreferrer">
+                            Search Live Prices
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader className="flex flex-row items-center gap-4">
+                    <ShoppingCart className="h-8 w-8 text-accent" />
+                    <div>
+                    <CardTitle>E-commerce Links</CardTitle>
+                    <CardDescription>Find this product on popular online stores.</CardDescription>
+                    </div>
+                </CardHeader>
+                <CardContent className="flex flex-wrap gap-2">
+                    {result.ecommerceLinks.map((link) => (
+                        <Button asChild key={link.siteName} variant="secondary">
+                            <Link href={link.searchUrl} target="_blank" rel="noopener noreferrer">
+                                Search on {link.siteName}
+                                <ExternalLink className="ml-2 h-4 w-4" />
+                            </Link>
+                        </Button>
+                    ))}
+                </CardContent>
             </Card>
           </div>
         )}
