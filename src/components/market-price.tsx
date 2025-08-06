@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -14,7 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, PoundSterling, TrendingUp, Lightbulb } from "lucide-react";
+import { Loader2, IndianRupee, TrendingUp, Lightbulb } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 
 const formSchema = z.object({
@@ -108,7 +109,7 @@ export default function MarketPrice() {
           <div className="mt-8 space-y-6">
             <Card>
               <CardHeader className="flex flex-row items-center gap-4">
-                <PoundSterling className="h-8 w-8 text-accent" />
+                <IndianRupee className="h-8 w-8 text-accent" />
                 <div>
                   <CardTitle>{t('marketPrice.results.averagePrice')} for {result.productName}</CardTitle>
                   <CardDescription>{result.averagePrice}</CardDescription>
