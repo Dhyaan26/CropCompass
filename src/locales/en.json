@@ -23,6 +23,27 @@
         "aiAssistant": "AI Assistant",
         "pestDetection": "Pest Detection"
     },
+    "cropsuggestions": {
+        "description": "Get AI-driven crop recommendations based on your farm's conditions."
+    },
+    "irrigationplan": {
+        "description": "Generate a tailored irrigation schedule to optimize water usage."
+    },
+    "yieldprediction": {
+        "description": "Estimate your potential crop yield with our predictive analysis."
+    },
+    "govtschemes": {
+        "description": "Find relevant government schemes for your farming needs."
+    },
+    "farmdataanalytics": {
+        "description": "Analyze your farm data to gain insights on yields, costs, and risks."
+    },
+    "pestdetection": {
+        "description": "Detect pests and diseases in your crops by uploading a photo."
+    },
+    "aiassistant": {
+        "description": "Ask our AI assistant anything about farming and agriculture."
+    },
     "cropSuggestion": {
         "title": "Soil & Crop Recommendations",
         "description": "Enter your farm's details to get personalized crop recommendations from our AI.",
