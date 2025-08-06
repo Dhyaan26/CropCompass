@@ -4,12 +4,14 @@ import CropCycle from '@/components/crop-cycle';
 import CropSuggestion from '@/components/crop-suggestion';
 import GovtSchemes from '@/components/govt-schemes';
 import IrrigationPlan from '@/components/irrigation-plan';
+import YieldPrediction from '@/components/yield-prediction';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   BarChartBig,
   CalendarDays,
   Droplets,
   Landmark,
+  LineChart,
   Trees,
 } from 'lucide-react';
 
@@ -30,7 +32,7 @@ export default function Home() {
         </div>
 
         <Tabs defaultValue="suggestions" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 print:hidden sm:grid-cols-3 md:grid-cols-5">
+          <TabsList className="grid w-full grid-cols-2 print:hidden sm:grid-cols-3 md:grid-cols-6">
             <TabsTrigger value="suggestions">
               <Trees className="mr-2 h-4 w-4" />
               Crop Suggestions
@@ -38,6 +40,10 @@ export default function Home() {
             <TabsTrigger value="irrigation">
               <Droplets className="mr-2 h-4 w-4" />
               Irrigation Plan
+            </TabsTrigger>
+            <TabsTrigger value="yield">
+              <LineChart className="mr-2 h-4 w-4" />
+              Yield Prediction
             </TabsTrigger>
             <TabsTrigger value="cycle">
               <CalendarDays className="mr-2 h-4 w-4" />
@@ -58,6 +64,9 @@ export default function Home() {
           </TabsContent>
           <TabsContent value="irrigation" className="mt-6">
             <IrrigationPlan />
+          </TabsContent>
+          <TabsContent value="yield" className="mt-6">
+            <YieldPrediction />
           </TabsContent>
           <TabsContent value="cycle" className="mt-6">
             <CropCycle />
