@@ -5,7 +5,7 @@ import AppHeader from '@/components/header';
 import { useTranslation } from '@/hooks/use-translation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, BarChartBig, Bug, Droplets, Landmark, LineChart, Trees } from 'lucide-react';
+import { ArrowRight, BarChartBig, Bug, Droplets, Landmark, LineChart, Trees, Bot } from 'lucide-react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -17,7 +17,7 @@ export default function Home() {
         { href: "/dashboard/irrigation-plan", icon: Droplets, text: t('tabs.irrigationPlan'), description: t('irrigationplan.description_short') },
         { href: "/dashboard/yield-prediction", icon: LineChart, text: t('tabs.yieldPrediction'), description: t('yieldprediction.description_short') },
         { href: "/dashboard/govt-schemes", icon: Landmark, text: t('tabs.govtSchemes'), description: t('govtschemes.description_short') },
-        { href: "/dashboard/farm-data-analytics", icon: BarChartBig, text: t('tabs.dataInsights'), description: t('farmdataanalytics.description_short') },
+        { href: "/dashboard/data-insights", icon: BarChartBig, text: t('tabs.dataInsights'), description: t('farmdataanalytics.description_short') },
         { href: "/dashboard/pest-disease-detection", icon: Bug, text: t('tabs.pestDetection'), description: t('pestdetection.description_short') },
     ];
 
