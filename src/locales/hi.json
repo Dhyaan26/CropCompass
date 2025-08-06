@@ -116,7 +116,8 @@
             "legend": "कैलेंडर लेजेंड",
             "wateringDay": "पानी देने का दिन",
             "noTask": "इस दिन के लिए कोई पानी देने का कार्य नहीं है।",
-            "nextWatering": "अगला पानी देने का दिन"
+            "upcomingWatering": "आगामी पानी देने के दिन",
+            "upcomingWateringDay": "आगामी पानी देने का दिन"
         }
     },
     "yieldPrediction": {

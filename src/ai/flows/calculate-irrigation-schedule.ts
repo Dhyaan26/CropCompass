@@ -25,7 +25,7 @@ const ScheduleEntrySchema = z.object({
 });
 
 const CalculateIrrigationScheduleOutputSchema = z.object({
-  schedule: z.array(ScheduleEntrySchema).describe('A 30-day watering schedule starting from today.'),
+  schedule: z.array(ScheduleEntrySchema).describe('A 30-day watering schedule starting from today. It must include at least 5-7 watering days spread out over the 30 day period.'),
   waterConservationTips: z.string().describe('Tips for water conservation.'),
 });
 export type CalculateIrrigationScheduleOutput = z.infer<typeof CalculateIrrigationScheduleOutputSchema>;
@@ -40,7 +40,7 @@ const prompt = ai.definePrompt({
   output: {schema: CalculateIrrigationScheduleOutputSchema},
   prompt: `You are an expert agricultural advisor specializing in irrigation. Based on the crop type, soil conditions, location, and weather forecasts, create a detailed 30-day irrigation schedule starting from today.
 
-The output must be a structured calendar of events. Also provide general water conservation techniques.
+The output must be a structured calendar of events. Make sure to schedule at least 5-7 distinct watering days within the 30-day period. Also provide general water conservation techniques.
 
 Provide the entire response in the following language: {{{language}}}.
 

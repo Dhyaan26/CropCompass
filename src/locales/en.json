@@ -57,7 +57,7 @@
         "description": "Visualize the distribution of major crops grown across India.",
         "description_short": "Visualize crop distribution data for India.",
         "title": "Crop Distribution",
-        "graphTypeLabel": "Chart Type",
+        "chartTypeLabel": "Chart Type",
         "graphTypePlaceholder": "Select a chart type",
         "statePlaceholder": "Select a state (or All India)",
         "barChart": "Bar Chart",
@@ -117,7 +117,8 @@
             "legend": "Calendar Legend",
             "wateringDay": "Watering Day",
             "noTask": "No watering task for this day.",
-            "nextWatering": "Next Watering Day"
+            "upcomingWatering": "Upcoming Watering Days",
+            "upcomingWateringDay": "Upcoming Watering Day"
         }
     },
     "yieldPrediction": {

@@ -116,7 +116,8 @@
             "legend": "ಕ್ಯಾಲೆಂಡರ್ ಲೆಜೆಂಡ್",
             "wateringDay": "ನೀರಾವರಿ ದಿನ",
             "noTask": "ಈ ದಿನಕ್ಕೆ ನೀರಾವರಿ ಕಾರ್ಯವಿಲ್ಲ.",
-            "nextWatering": "ಮುಂದಿನ ನೀರಾವರಿ ದಿನ"
+            "upcomingWatering": "ಮುಂಬರುವ ನೀರಾವರಿ ದಿನಗಳು",
+            "upcomingWateringDay": "ಮುಂಬರುವ ನೀರಾವರಿ ದಿನ"
         }
     },
     "yieldPrediction": {

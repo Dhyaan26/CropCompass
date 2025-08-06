@@ -20,7 +20,7 @@ import { Loader2, CalendarClock, Recycle, Droplets, Forward } from "lucide-react
 import { useTranslation } from "@/hooks/use-translation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar } from "./ui/calendar";
-import { addDays, format, parse, isAfter, startOfToday } from "date-fns";
+import { addDays, format, parse, isAfter, startOfToday, isToday } from "date-fns";
 
 const soilTypes = [
     "Alluvial Soil",
@@ -53,7 +53,7 @@ export default function IrrigationPlan() {
   const [selectedState, setSelectedState] = useState<string>("");
   const { toast } = useToast();
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(new Date());
-  const [nextWateringDay, setNextWateringDay] = useState<ScheduleEntry | null>(null);
+  const [upcomingWateringDays, setUpcomingWateringDays] = useState<ScheduleEntry[] | null>(null);
   
   const indianStates = t('indianStates') as any;
 
@@ -70,18 +70,21 @@ export default function IrrigationPlan() {
     acc.set(format(date, 'yyyy-MM-dd'), item.task);
     return acc;
   }, new Map<string, string>());
+
+  const upcomingWateringDates = upcomingWateringDays?.map(d => new Date(`${d.date}T00:00:00`)) || [];
   
   useEffect(() => {
     if (result?.schedule) {
       const today = startOfToday();
-      const nextDay = result.schedule
+      const upcomingDays = result.schedule
         .map(item => ({...item, parsedDate: parse(item.date, 'yyyy-MM-dd', new Date())}))
+        .filter(item => isAfter(item.parsedDate, today) || isToday(item.parsedDate))
         .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime())
-        .find(item => isAfter(item.parsedDate, today) || format(item.parsedDate, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd'));
+        .slice(0, 3);
       
-      setNextWateringDay(nextDay || null);
+      setUpcomingWateringDays(upcomingDays.length > 0 ? upcomingDays : null);
     } else {
-      setNextWateringDay(null);
+      setUpcomingWateringDays(null);
     }
   }, [result]);
 
@@ -255,12 +258,17 @@ export default function IrrigationPlan() {
                         disabled={{ before: new Date(), after: addDays(new Date(), 30)}}
                         modifiers={{
                             wateringDay: (date) => scheduleMap?.has(format(date, 'yyyy-MM-dd')) || false,
+                            upcomingWatering: upcomingWateringDates,
                         }}
                         modifiersStyles={{
                             wateringDay: {
                                 border: "2px solid hsl(var(--primary))",
                                 color: "hsl(var(--primary))",
                                 fontWeight: 'bold'
+                            },
+                             upcomingWatering: {
+                                backgroundColor: 'hsl(var(--secondary))',
+                                color: 'hsl(var(--secondary-foreground))',
                             }
                         }}
                     />
@@ -275,17 +283,23 @@ export default function IrrigationPlan() {
                 </CardContent>
              </Card>
              <div className="space-y-8">
-                {nextWateringDay && (
+                {upcomingWateringDays && upcomingWateringDays.length > 0 && (
                     <Card>
                         <CardHeader className="flex flex-row items-center gap-4">
                             <Forward className="h-8 w-8 text-accent" />
                             <div>
-                                <CardTitle>{t('irrigationPlan.results.nextWatering')}</CardTitle>
-                                <CardDescription>{format(new Date(`${nextWateringDay.date}T00:00:00`), 'PPP')}</CardDescription>
+                                <CardTitle>{t('irrigationPlan.results.upcomingWatering')}</CardTitle>
                             </div>
                         </CardHeader>
                          <CardContent>
-                            <p className="text-sm text-muted-foreground">{nextWateringDay.task}</p>
+                            <ul className="space-y-2">
+                                {upcomingWateringDays.map((day, index) => (
+                                    <li key={index} className="text-sm">
+                                        <strong className="font-semibold">{format(new Date(`${day.date}T00:00:00`), 'PPP')}:</strong>
+                                        <span className="text-muted-foreground ml-2">{day.task}</span>
+                                    </li>
+                                ))}
+                            </ul>
                         </CardContent>
                     </Card>
                 )}
@@ -296,12 +310,18 @@ export default function IrrigationPlan() {
                         <CardTitle>{t('irrigationPlan.results.legend')}</CardTitle>
                         </div>
                     </CardHeader>
-                    <CardContent>
+                    <CardContent className="space-y-2">
                         <div className="flex items-center gap-4">
                             <div className="w-8 h-8 rounded-md border-2 border-primary text-primary font-bold flex items-center justify-center">
                                 {new Date().getDate()}
                             </div>
                             <span className="text-sm text-muted-foreground">{t('irrigationPlan.results.wateringDay')}</span>
+                        </div>
+                         <div className="flex items-center gap-4">
+                            <div className="w-8 h-8 rounded-md bg-secondary text-secondary-foreground flex items-center justify-center">
+                                {addDays(new Date(), 1).getDate()}
+                            </div>
+                            <span className="text-sm text-muted-foreground">{t('irrigationPlan.results.upcomingWateringDay')}</span>
                         </div>
                     </CardContent>
                 </Card>
