@@ -84,6 +84,8 @@ export default function CropSuggestion() {
     form.resetField("district");
   }
 
+  const districtsForSelectedState = selectedState && indianStates[selectedState] ? indianStates[selectedState] : [];
+
   return (
     <Card className="shadow-lg w-full max-w-4xl mx-auto">
       <CardHeader>
@@ -129,7 +131,7 @@ export default function CropSuggestion() {
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {selectedState && indianStates[selectedState as keyof typeof indianStates].sort().map((district: string) => (
+                            {districtsForSelectedState.sort().map((district: string) => (
                                 <SelectItem key={district} value={district}>{district}</SelectItem>
                             ))}
                         </SelectContent>
