@@ -1,0 +1,121 @@
+{
+    "header": {
+        "tagline": "Your Smart Farming Assistant",
+        "downloadReport": "Download Report"
+    },
+    "home": {
+        "title": "Comprehensive Farming Plan",
+        "subtitle": "Get personalized recommendations for your farm, from crop selection and irrigation schedules to government schemes, all powered by AI."
+    },
+    "tabs": {
+        "cropSuggestions": "Crop Suggestions",
+        "irrigationPlan": "Irrigation Plan",
+        "yieldPrediction": "Yield Prediction",
+        "govtSchemes": "Govt. Schemes",
+        "dataInsights": "Data Insights"
+    },
+    "cropSuggestion": {
+        "title": "1. Soil & Crop Recommendations",
+        "description": "Enter your farm's details to get personalized crop recommendations from our AI.",
+        "locationLabel": "Location (e.g., District, State)",
+        "locationPlaceholder": "E.g., Nashik, Maharashtra",
+        "soilTypeLabel": "Soil Type",
+        "soilTypePlaceholder": "E.g., Black Clay, Red Loam",
+        "resourcesLabel": "Available Resources",
+        "resourcesPlaceholder": "Describe your water access, budget, machinery, etc.",
+        "button": "Get Recommendations",
+        "analyzing": "Analyzing...",
+        "results": {
+            "recommendedCrops": "Recommended Crops",
+            "recommendedCropsDesc": "Based on your input, here are the most suitable crops.",
+            "aiReasoning": "AI Reasoning",
+            "aiReasoningDesc": "Here's why these crops were recommended."
+        }
+    },
+    "irrigationPlan": {
+        "title": "2. Irrigation Plan",
+        "description": "Generate a tailored irrigation schedule to optimize water usage and crop health.",
+        "cropTypeLabel": "Crop Type",
+        "cropTypePlaceholder": "E.g., Wheat, Sugarcane",
+        "soilTypeLabel": "Soil Type",
+        "soilTypePlaceholder": "E.g., Black Clay, Red Loam",
+        "locationLabel": "Location (e.g., District, State)",
+        "locationPlaceholder": "E.g., Nashik, Maharashtra",
+        "waterAccessLabel": "Water Access",
+        "waterAccessPlaceholder": "E.g., Borewell, Canal, Rain-fed",
+        "button": "Get Irrigation Plan",
+        "calculating": "Calculating...",
+        "results": {
+            "schedule": "Recommended Irrigation Schedule",
+            "scheduleDesc": "Follow this schedule for optimal watering.",
+            "conservation": "Water Conservation Tips",
+            "conservationDesc": "Techniques to help you save water."
+        }
+    },
+    "yieldPrediction": {
+        "title": "Yield Prediction",
+        "description": "Estimate your potential crop yield based on farming conditions.",
+        "cropTypeLabel": "Crop Type",
+        "cropTypePlaceholder": "E.g., Rice, Cotton",
+        "soilTypeLabel": "Soil Type",
+        "soilTypePlaceholder": "E.g., Alluvial, Black",
+        "seasonLabel": "Season",
+        "seasonPlaceholder": "Select a cropping season",
+        "kharif": "Kharif (Monsoon)",
+        "rabi": "Rabi (Winter)",
+        "zaid": "Zaid (Summer)",
+        "locationLabel": "Location (e.g., District, State)",
+        "locationPlaceholder": "E.g., Guntur, Andhra Pradesh",
+        "button": "Predict Yield",
+        "predicting": "Predicting...",
+        "results": {
+            "predictedYield": "Predicted Yield",
+            "influencingFactors": "Influencing Factors",
+            "recommendations": "Recommendations for Improvement"
+        }
+    },
+    "govtSchemes": {
+        "title": "4. Applicable Government Schemes",
+        "description": "Enter your details to find relevant central and state government schemes.",
+        "locationLabel": "Location (e.g., District, State)",
+        "locationPlaceholder": "E.g., Pune, Maharashtra",
+        "categoryLabel": "Farmer Category",
+        "categoryPlaceholder": "Select your category",
+        "smallFarmer": "Small Farmer (1-2 hectares)",
+        "marginalFarmer": "Marginal Farmer (less than 1 hectare)",
+        "largeFarmer": "Large Farmer (more than 2 hectares)",
+        "button": "Find Schemes",
+        "searching": "Searching...",
+        "results": {
+            "eligibility": "Eligibility",
+            "benefits": "Benefits",
+            "documents": "Documents Required",
+            "application": "How to Apply",
+            "noSchemes": "No specific schemes found for the provided details. Try broadening your search."
+        }
+    },
+    "aiInsights": {
+        "title": "5. AI Insights from Your Data",
+        "description": "Upload your farm data (CSV, XLS, PDF) to get personalized insights on yields, costs, and risks.",
+        "dropzone": "Drag and drop your file here or click to upload.",
+        "chooseFile": "Choose File",
+        "button": "Analyze Data",
+        "analyzing": "Analyzing...",
+        "results": {
+            "title": "Data Analysis Results",
+            "description": "Here are the AI-powered insights from your data."
+        }
+    },
+    "footer": {
+        "copyright": "AgroGPT. Powered by AI for a greener tomorrow."
+    },
+    "toasts": {
+        "error": "Error",
+        "cropSuggestionError": "Failed to get crop suggestions. Please try again.",
+        "irrigationPlanError": "Failed to get irrigation schedule. Please try again.",
+        "yieldPredictionError": "Failed to predict yield. Please try again.",
+        "govtSchemesError": "Failed to find government schemes. Please try again.",
+        "aiInsightsError": "Failed to analyze data. Please try again.",
+        "fileSelectError": "Please select a file to analyze."
+    }
+}

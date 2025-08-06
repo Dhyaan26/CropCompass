@@ -1,3 +1,5 @@
+"use client";
+
 import AppHeader from '@/components/header';
 import AiInsights from '@/components/ai-insights';
 import CropSuggestion from '@/components/crop-suggestion';
@@ -12,8 +14,10 @@ import {
   LineChart,
   Trees,
 } from 'lucide-react';
+import { useTranslation } from '@/hooks/use-translation';
 
 export default function Home() {
+  const { t } = useTranslation();
   return (
     <div className="flex min-h-screen flex-col">
       <AppHeader />
@@ -21,11 +25,10 @@ export default function Home() {
       <main className="container mx-auto flex-grow p-4 md:p-6 lg:p-8">
         <div className="mb-8 text-center print:hidden">
           <h2 className="mb-2 text-3xl font-bold text-primary/90 font-headline md:text-4xl">
-            Comprehensive Farming Plan
+            {t('home.title')}
           </h2>
           <p className="mx-auto max-w-3xl text-muted-foreground">
-            Get personalized recommendations for your farm, from crop selection
-            and irrigation schedules to government schemes, all powered by AI.
+            {t('home.subtitle')}
           </p>
         </div>
 
@@ -33,23 +36,23 @@ export default function Home() {
           <TabsList className="grid w-full grid-cols-2 print:hidden sm:grid-cols-3 md:grid-cols-5">
             <TabsTrigger value="suggestions">
               <Trees className="mr-2 h-4 w-4" />
-              Crop Suggestions
+              {t('tabs.cropSuggestions')}
             </TabsTrigger>
             <TabsTrigger value="irrigation">
               <Droplets className="mr-2 h-4 w-4" />
-              Irrigation Plan
+              {t('tabs.irrigationPlan')}
             </TabsTrigger>
             <TabsTrigger value="yield">
               <LineChart className="mr-2 h-4 w-4" />
-              Yield Prediction
+              {t('tabs.yieldPrediction')}
             </TabsTrigger>
             <TabsTrigger value="schemes">
               <Landmark className="mr-2 h-4 w-4" />
-              Govt. Schemes
+              {t('tabs.govtSchemes')}
             </TabsTrigger>
             <TabsTrigger value="insights">
               <BarChartBig className="mr-2 h-4 w-4" />
-              Data Insights
+              {t('tabs.dataInsights')}
             </TabsTrigger>
           </TabsList>
 
@@ -74,8 +77,7 @@ export default function Home() {
       <footer className="mt-12 border-t py-6 print:hidden">
         <div className="container mx-auto text-center text-sm text-muted-foreground">
           <p>
-            &copy; {new Date().getFullYear()} AgroGPT. Powered by AI for a
-            greener tomorrow.
+            &copy; {new Date().getFullYear()} {t('footer.copyright')}
           </p>
         </div>
       </footer>

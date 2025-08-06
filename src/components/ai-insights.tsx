@@ -11,8 +11,10 @@ import {
     type AnalyzeFarmDataInput,
     type AnalyzeFarmDataOutput,
 } from "@/ai/flows/analyze-farm-data";
+import { useTranslation } from '@/hooks/use-translation';
 
 export default function AiInsights() {
+    const { t } = useTranslation();
     const [file, setFile] = useState<File | null>(null);
     const [fileDataUri, setFileDataUri] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -38,8 +40,8 @@ export default function AiInsights() {
         if (!file || !fileDataUri) {
             toast({
                 variant: "destructive",
-                title: "Error",
-                description: "Please select a file to analyze.",
+                title: t('toasts.error'),
+                description: t('toasts.fileSelectError'),
             });
             return;
         }
@@ -58,8 +60,8 @@ export default function AiInsights() {
             console.error("Error analyzing data:", error);
             toast({
                 variant: "destructive",
-                title: "Error",
-                description: "Failed to analyze data. Please try again.",
+                title: t('toasts.error'),
+                description: t('toasts.aiInsightsError'),
             });
         } finally {
             setLoading(false);
@@ -69,20 +71,20 @@ export default function AiInsights() {
     return (
         <Card className="shadow-lg">
             <CardHeader>
-                <CardTitle>5. AI Insights from Your Data</CardTitle>
-                <CardDescription>Upload your farm data (CSV, XLS, PDF) to get personalized insights on yields, costs, and risks.</CardDescription>
+                <CardTitle>{t('aiInsights.title')}</CardTitle>
+                <CardDescription>{t('aiInsights.description')}</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="text-center">
                     <div className="rounded-lg border-2 border-dashed border-border p-8">
                         <UploadCloud className="mx-auto h-12 w-12 text-muted-foreground" />
                         <p className="mt-4 text-sm text-muted-foreground">
-                            Drag and drop your file here or click to upload.
+                            {t('aiInsights.dropzone')}
                         </p>
                         <Input id="file-upload" type="file" className="hidden" onChange={handleFileChange} accept=".csv, .xls, .xlsx, .pdf" />
                         <Button asChild className="mt-4">
                             <label htmlFor="file-upload">
-                                Choose File
+                                {t('aiInsights.chooseFile')}
                             </label>
                         </Button>
                         {file && (
@@ -96,10 +98,10 @@ export default function AiInsights() {
                         {loading ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                Analyzing...
+                                {t('aiInsights.analyzing')}
                             </>
                         ) : (
-                            "Analyze Data"
+                            t('aiInsights.button')
                         )}
                     </Button>
                 </div>
@@ -109,8 +111,8 @@ export default function AiInsights() {
                         <CardHeader className="flex flex-row items-center gap-4">
                             <BrainCircuit className="h-8 w-8 text-accent" />
                             <div>
-                                <CardTitle>Data Analysis Results</CardTitle>
-                                <CardDescription>Here are the AI-powered insights from your data.</CardDescription>
+                                <CardTitle>{t('aiInsights.results.title')}</CardTitle>
+                                <CardDescription>{t('aiInsights.results.description')}</CardDescription>
                             </div>
                         </CardHeader>
                         <CardContent>

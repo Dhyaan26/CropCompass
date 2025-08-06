@@ -2,8 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Leaf, Download } from "lucide-react";
+import LanguageSwitcher from "./language-switcher";
+import { useTranslation } from "@/hooks/use-translation";
 
 export default function AppHeader() {
+  const { t } = useTranslation();
   const handleDownload = () => {
     // A simple print-to-PDF solution for modern browsers.
     try {
@@ -21,11 +24,14 @@ export default function AppHeader() {
           <Leaf className="h-8 w-8 text-primary" />
           <h1 className="text-2xl font-bold text-primary font-headline">AgroGPT</h1>
         </div>
-        <p className="hidden md:block text-muted-foreground">Your Smart Farming Assistant</p>
-        <Button onClick={handleDownload}>
-          <Download className="mr-2 h-4 w-4" />
-          Download Report
-        </Button>
+        <p className="hidden md:block text-muted-foreground">{t('header.tagline')}</p>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <Button onClick={handleDownload}>
+            <Download className="mr-2 h-4 w-4" />
+            {t('header.downloadReport')}
+          </Button>
+        </div>
       </div>
     </header>
   );

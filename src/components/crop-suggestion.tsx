@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ListChecks, Lightbulb } from "lucide-react";
+import { useTranslation } from "@/hooks/use-translation";
 
 const formSchema = z.object({
   location: z.string().min(2, { message: "Location is required." }),
@@ -24,6 +25,7 @@ const formSchema = z.object({
 });
 
 export default function CropSuggestion() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<SuggestOptimalCropsOutput | null>(null);
   const { toast } = useToast();
@@ -47,8 +49,8 @@ export default function CropSuggestion() {
       console.error("Error getting crop suggestions:", error);
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "Failed to get crop suggestions. Please try again.",
+        title: t('toasts.error'),
+        description: t('toasts.cropSuggestionError'),
       });
     } finally {
       setLoading(false);
@@ -58,8 +60,8 @@ export default function CropSuggestion() {
   return (
     <Card className="shadow-lg">
       <CardHeader>
-        <CardTitle>1. Soil & Crop Recommendations</CardTitle>
-        <CardDescription>Enter your farm's details to get personalized crop recommendations from our AI.</CardDescription>
+        <CardTitle>{t('cropSuggestion.title')}</CardTitle>
+        <CardDescription>{t('cropSuggestion.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -70,9 +72,9 @@ export default function CropSuggestion() {
                 name="location"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location (e.g., District, State)</FormLabel>
+                    <FormLabel>{t('cropSuggestion.locationLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Nashik, Maharashtra" {...field} />
+                      <Input placeholder={t('cropSuggestion.locationPlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -83,9 +85,9 @@ export default function CropSuggestion() {
                 name="soilType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Soil Type</FormLabel>
+                    <FormLabel>{t('cropSuggestion.soilTypeLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Black Clay, Red Loam" {...field} />
+                      <Input placeholder={t('cropSuggestion.soilTypePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -97,9 +99,9 @@ export default function CropSuggestion() {
               name="resources"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Available Resources</FormLabel>
+                  <FormLabel>{t('cropSuggestion.resourcesLabel')}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Describe your water access, budget, machinery, etc." {...field} />
+                    <Textarea placeholder={t('cropSuggestion.resourcesPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,10 +111,10 @@ export default function CropSuggestion() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Analyzing...
+                  {t('cropSuggestion.analyzing')}
                 </>
               ) : (
-                "Get Recommendations"
+                t('cropSuggestion.button')
               )}
             </Button>
           </form>
@@ -124,8 +126,8 @@ export default function CropSuggestion() {
               <CardHeader className="flex flex-row items-center gap-4">
                 <ListChecks className="h-8 w-8 text-accent" />
                 <div>
-                  <CardTitle>Recommended Crops</CardTitle>
-                  <CardDescription>Based on your input, here are the most suitable crops.</CardDescription>
+                  <CardTitle>{t('cropSuggestion.results.recommendedCrops')}</CardTitle>
+                  <CardDescription>{t('cropSuggestion.results.recommendedCropsDesc')}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent>
@@ -143,8 +145,8 @@ export default function CropSuggestion() {
               <CardHeader className="flex flex-row items-center gap-4">
                 <Lightbulb className="h-8 w-8 text-accent" />
                 <div>
-                  <CardTitle>AI Reasoning</CardTitle>
-                  <CardDescription>Here's why these crops were recommended.</CardDescription>
+                  <CardTitle>{t('cropSuggestion.results.aiReasoning')}</CardTitle>
+                  <CardDescription>{t('cropSuggestion.results.aiReasoningDesc')}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent>

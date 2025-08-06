@@ -15,6 +15,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CalendarClock, Recycle } from "lucide-react";
+import { useTranslation } from "@/hooks/use-translation";
 
 const formSchema = z.object({
   cropType: z.string().min(2, { message: "Crop type is required." }),
@@ -24,6 +25,7 @@ const formSchema = z.object({
 });
 
 export default function IrrigationPlan() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<CalculateIrrigationScheduleOutput | null>(null);
   const { toast } = useToast();
@@ -48,8 +50,8 @@ export default function IrrigationPlan() {
       console.error("Error calculating irrigation schedule:", error);
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "Failed to get irrigation schedule. Please try again.",
+        title: t('toasts.error'),
+        description: t('toasts.irrigationPlanError'),
       });
     } finally {
       setLoading(false);
@@ -59,8 +61,8 @@ export default function IrrigationPlan() {
   return (
     <Card className="shadow-lg">
       <CardHeader>
-        <CardTitle>2. Irrigation Plan</CardTitle>
-        <CardDescription>Generate a tailored irrigation schedule to optimize water usage and crop health.</CardDescription>
+        <CardTitle>{t('irrigationPlan.title')}</CardTitle>
+        <CardDescription>{t('irrigationPlan.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -71,9 +73,9 @@ export default function IrrigationPlan() {
                 name="cropType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Crop Type</FormLabel>
+                    <FormLabel>{t('irrigationPlan.cropTypeLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Wheat, Sugarcane" {...field} />
+                      <Input placeholder={t('irrigationPlan.cropTypePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -84,9 +86,9 @@ export default function IrrigationPlan() {
                 name="soilType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Soil Type</FormLabel>
+                    <FormLabel>{t('irrigationPlan.soilTypeLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Black Clay, Red Loam" {...field} />
+                      <Input placeholder={t('irrigationPlan.soilTypePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -97,9 +99,9 @@ export default function IrrigationPlan() {
                 name="location"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location (e.g., District, State)</FormLabel>
+                    <FormLabel>{t('irrigationPlan.locationLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Nashik, Maharashtra" {...field} />
+                      <Input placeholder={t('irrigationPlan.locationPlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -110,9 +112,9 @@ export default function IrrigationPlan() {
                 name="waterAccess"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Water Access</FormLabel>
+                    <FormLabel>{t('irrigationPlan.waterAccessLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Borewell, Canal, Rain-fed" {...field} />
+                      <Input placeholder={t('irrigationPlan.waterAccessPlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -124,10 +126,10 @@ export default function IrrigationPlan() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Calculating...
+                  {t('irrigationPlan.calculating')}
                 </>
               ) : (
-                "Get Irrigation Plan"
+                t('irrigationPlan.button')
               )}
             </Button>
           </form>
@@ -139,8 +141,8 @@ export default function IrrigationPlan() {
               <CardHeader className="flex flex-row items-center gap-4">
                 <CalendarClock className="h-8 w-8 text-accent" />
                 <div>
-                  <CardTitle>Recommended Irrigation Schedule</CardTitle>
-                  <CardDescription>Follow this schedule for optimal watering.</CardDescription>
+                  <CardTitle>{t('irrigationPlan.results.schedule')}</CardTitle>
+                  <CardDescription>{t('irrigationPlan.results.scheduleDesc')}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent>
@@ -152,8 +154,8 @@ export default function IrrigationPlan() {
               <CardHeader className="flex flex-row items-center gap-4">
                 <Recycle className="h-8 w-8 text-accent" />
                 <div>
-                  <CardTitle>Water Conservation Tips</CardTitle>
-                  <CardDescription>Techniques to help you save water.</CardDescription>
+                  <CardTitle>{t('irrigationPlan.results.conservation')}</CardTitle>
+                  <CardDescription>{t('irrigationPlan.results.conservationDesc')}</CardDescription>
                 </div>
               </CardHeader>
               <CardContent>

@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, TrendingUp, Lightbulb, CheckCircle } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useTranslation } from "@/hooks/use-translation";
 
 const formSchema = z.object({
   cropType: z.string().min(2, { message: "Crop type is required." }),
@@ -25,6 +26,7 @@ const formSchema = z.object({
 });
 
 export default function YieldPrediction() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PredictYieldOutput | null>(null);
   const { toast } = useToast();
@@ -48,8 +50,8 @@ export default function YieldPrediction() {
       console.error("Error predicting yield:", error);
       toast({
         variant: "destructive",
-        title: "Error",
-        description: "Failed to predict yield. Please try again.",
+        title: t('toasts.error'),
+        description: t('toasts.yieldPredictionError'),
       });
     } finally {
       setLoading(false);
@@ -59,8 +61,8 @@ export default function YieldPrediction() {
   return (
     <Card className="shadow-lg">
       <CardHeader>
-        <CardTitle>Yield Prediction</CardTitle>
-        <CardDescription>Estimate your potential crop yield based on farming conditions.</CardDescription>
+        <CardTitle>{t('yieldPrediction.title')}</CardTitle>
+        <CardDescription>{t('yieldPrediction.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -71,9 +73,9 @@ export default function YieldPrediction() {
                 name="cropType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Crop Type</FormLabel>
+                    <FormLabel>{t('yieldPrediction.cropTypeLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Rice, Cotton" {...field} />
+                      <Input placeholder={t('yieldPrediction.cropTypePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -84,9 +86,9 @@ export default function YieldPrediction() {
                 name="soilType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Soil Type</FormLabel>
+                    <FormLabel>{t('yieldPrediction.soilTypeLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Alluvial, Black" {...field} />
+                      <Input placeholder={t('yieldPrediction.soilTypePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -97,17 +99,17 @@ export default function YieldPrediction() {
                 name="season"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Season</FormLabel>
+                    <FormLabel>{t('yieldPrediction.seasonLabel')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                             <SelectTrigger>
-                                <SelectValue placeholder="Select a cropping season" />
+                                <SelectValue placeholder={t('yieldPrediction.seasonPlaceholder')} />
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            <SelectItem value="Kharif">Kharif (Monsoon)</SelectItem>
-                            <SelectItem value="Rabi">Rabi (Winter)</SelectItem>
-                            <SelectItem value="Zaid">Zaid (Summer)</SelectItem>
+                            <SelectItem value="Kharif">{t('yieldPrediction.kharif')}</SelectItem>
+                            <SelectItem value="Rabi">{t('yieldPrediction.rabi')}</SelectItem>
+                            <SelectItem value="Zaid">{t('yieldPrediction.zaid')}</SelectItem>
                         </SelectContent>
                     </Select>
                     <FormMessage />
@@ -119,9 +121,9 @@ export default function YieldPrediction() {
                 name="location"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Location (e.g., District, State)</FormLabel>
+                    <FormLabel>{t('yieldPrediction.locationLabel')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="E.g., Guntur, Andhra Pradesh" {...field} />
+                      <Input placeholder={t('yieldPrediction.locationPlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -133,10 +135,10 @@ export default function YieldPrediction() {
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Predicting...
+                  {t('yieldPrediction.predicting')}
                 </>
               ) : (
-                "Predict Yield"
+                t('yieldPrediction.button')
               )}
             </Button>
           </form>
@@ -148,7 +150,7 @@ export default function YieldPrediction() {
               <CardHeader className="flex flex-row items-center gap-4">
                 <TrendingUp className="h-8 w-8 text-accent" />
                 <div>
-                  <CardTitle>Predicted Yield</CardTitle>
+                  <CardTitle>{t('yieldPrediction.results.predictedYield')}</CardTitle>
                   <CardDescription>{result.predictedYield}</CardDescription>
                 </div>
               </CardHeader>
@@ -158,7 +160,7 @@ export default function YieldPrediction() {
               <CardHeader className="flex flex-row items-center gap-4">
                 <Lightbulb className="h-8 w-8 text-accent" />
                 <div>
-                  <CardTitle>Influencing Factors</CardTitle>
+                  <CardTitle>{t('yieldPrediction.results.influencingFactors')}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -170,7 +172,7 @@ export default function YieldPrediction() {
               <CardHeader className="flex flex-row items-center gap-4">
                 <CheckCircle className="h-8 w-8 text-accent" />
                 <div>
-                  <CardTitle>Recommendations for Improvement</CardTitle>
+                  <CardTitle>{t('yieldPrediction.results.recommendations')}</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
