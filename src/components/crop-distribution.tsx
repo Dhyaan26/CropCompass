@@ -15,7 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, BarChart, PieChart, LineChart } from "lucide-react";
+import { Loader2, BarChart, PieChart } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import {
     BarChart as RechartsBarChart,
@@ -34,6 +34,7 @@ import {
 
 const formSchema = z.object({
   graphType: z.string({ required_error: "Please select a graph type." }),
+  location: z.string().optional(),
 });
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#FF4560', '#775DD0', '#5A2A27'];
@@ -44,6 +45,8 @@ export default function CropDistribution() {
   const [result, setResult] = useState<GetCropDistributionOutput | null>(null);
   const [graphType, setGraphType] = useState<string | null>(null);
   const { toast } = useToast();
+
+  const indianStates = t('indianStates');
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,6 +59,7 @@ export default function CropDistribution() {
     try {
       const input: GetCropDistributionInput = {
         graphType: data.graphType,
+        location: data.location,
         language,
       };
       const response = await getCropDistribution(input);
@@ -127,27 +131,52 @@ export default function CropDistribution() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="graphType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('cropDistribution.graphTypeLabel')}</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                          <SelectTrigger>
-                              <SelectValue placeholder={t('cropDistribution.graphTypePlaceholder')} />
-                          </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                          <SelectItem value="Bar Chart">{t('cropDistribution.barChart')}</SelectItem>
-                          <SelectItem value="Pie Chart">{t('cropDistribution.pieChart')}</SelectItem>
-                      </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid md:grid-cols-2 gap-6">
+              <FormField
+                control={form.control}
+                name="graphType"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('cropDistribution.graphTypeLabel')}</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder={t('cropDistribution.graphTypePlaceholder')} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            <SelectItem value="Bar Chart">{t('cropDistribution.barChart')}</SelectItem>
+                            <SelectItem value="Pie Chart">{t('cropDistribution.pieChart')}</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('cropSuggestion.stateLabel')} (Optional)</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder={t('cropDistribution.statePlaceholder')} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            <SelectItem value="India">All India</SelectItem>
+                            {indianStates && Object.keys(indianStates).sort().map(state => (
+                                <SelectItem key={state} value={state}>{state}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <Button type="submit" disabled={loading} className="w-full md:w-auto">
               {loading ? (
                 <>

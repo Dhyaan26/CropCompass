@@ -56,9 +56,10 @@
     "cropdistribution": {
         "description": "Visualize the distribution of major crops grown across India.",
         "description_short": "Visualize crop distribution data for India.",
-        "title": "Crop Distribution in India",
+        "title": "Crop Distribution",
         "graphTypeLabel": "Graph Type",
         "graphTypePlaceholder": "Select a graph type",
+        "statePlaceholder": "Select a state (or All India)",
         "barChart": "Bar Chart",
         "pieChart": "Pie Chart",
         "button": "Generate Graph",

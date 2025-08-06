@@ -55,9 +55,10 @@
     "cropdistribution": {
         "description": "भारत भर में उगाई जाने वाली प्रमुख फसलों के वितरण की कल्पना करें।",
         "description_short": "भारत के लिए फसल वितरण डेटा की कल्पना करें।",
-        "title": "भारत में फसल वितरण",
+        "title": "फसल वितरण",
         "graphTypeLabel": "ग्राफ का प्रकार",
         "graphTypePlaceholder": "एक ग्राफ प्रकार चुनें",
+        "statePlaceholder": "एक राज्य चुनें (या अखिल भारतीय)",
         "barChart": "बार चार्ट",
         "pieChart": "पाई चार्ट",
         "button": "ग्राफ उत्पन्न करें",
