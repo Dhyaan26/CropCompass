@@ -69,10 +69,10 @@ export default function AiInsights() {
     };
 
     return (
-        <Card className="shadow-lg">
+        <Card className="shadow-lg w-full max-w-4xl mx-auto">
             <CardHeader>
-                <CardTitle>{t('aiInsights.title')}</CardTitle>
-                <CardDescription>{t('aiInsights.description')}</CardDescription>
+                <CardTitle className="text-2xl font-bold text-center">{t('aiInsights.title')}</CardTitle>
+                <CardDescription className="text-center">{t('aiInsights.description')}</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="text-center">

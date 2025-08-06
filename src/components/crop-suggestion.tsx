@@ -58,10 +58,10 @@ export default function CropSuggestion() {
   };
 
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg w-full max-w-4xl mx-auto">
       <CardHeader>
-        <CardTitle>{t('cropSuggestion.title')}</CardTitle>
-        <CardDescription>{t('cropSuggestion.description')}</CardDescription>
+        <CardTitle className="text-2xl font-bold text-center">{t('cropSuggestion.title')}</CardTitle>
+        <CardDescription className="text-center">{t('cropSuggestion.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>

@@ -59,10 +59,10 @@ export default function YieldPrediction() {
   };
 
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg w-full max-w-4xl mx-auto">
       <CardHeader>
-        <CardTitle>{t('yieldPrediction.title')}</CardTitle>
-        <CardDescription>{t('yieldPrediction.description')}</CardDescription>
+        <CardTitle className="text-2xl font-bold text-center">{t('yieldPrediction.title')}</CardTitle>
+        <CardDescription className="text-center">{t('yieldPrediction.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>

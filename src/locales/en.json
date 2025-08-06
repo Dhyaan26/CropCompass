@@ -7,15 +7,20 @@
         "title": "Comprehensive Farming Plan",
         "subtitle": "Get personalized recommendations for your farm, from crop selection and irrigation schedules to government schemes, all powered by AI."
     },
+    "dashboard": {
+        "title": "Your Farming Dashboard",
+        "cta": "Go to Dashboard"
+    },
     "tabs": {
         "cropSuggestions": "Crop Suggestions",
         "irrigationPlan": "Irrigation Plan",
         "yieldPrediction": "Yield Prediction",
         "govtSchemes": "Govt. Schemes",
-        "dataInsights": "Data Insights"
+        "dataInsights": "Data Insights",
+        "dashboard": "Dashboard"
     },
     "cropSuggestion": {
-        "title": "1. Soil & Crop Recommendations",
+        "title": "Soil & Crop Recommendations",
         "description": "Enter your farm's details to get personalized crop recommendations from our AI.",
         "locationLabel": "Location (e.g., District, State)",
         "locationPlaceholder": "E.g., Nashik, Maharashtra",
@@ -33,7 +38,7 @@
         }
     },
     "irrigationPlan": {
-        "title": "2. Irrigation Plan",
+        "title": "Irrigation Plan",
         "description": "Generate a tailored irrigation schedule to optimize water usage and crop health.",
         "cropTypeLabel": "Crop Type",
         "cropTypePlaceholder": "E.g., Wheat, Sugarcane",
@@ -75,7 +80,7 @@
         }
     },
     "govtSchemes": {
-        "title": "4. Applicable Government Schemes",
+        "title": "Applicable Government Schemes",
         "description": "Enter your details to find relevant central and state government schemes.",
         "locationLabel": "Location (e.g., District, State)",
         "locationPlaceholder": "E.g., Pune, Maharashtra",
@@ -95,7 +100,7 @@
         }
     },
     "aiInsights": {
-        "title": "5. AI Insights from Your Data",
+        "title": "AI Insights from Your Data",
         "description": "Upload your farm data (CSV, XLS, PDF) to get personalized insights on yields, costs, and risks.",
         "dropzone": "Drag and drop your file here or click to upload.",
         "chooseFile": "Choose File",

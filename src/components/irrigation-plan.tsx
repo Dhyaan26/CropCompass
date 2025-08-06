@@ -59,10 +59,10 @@ export default function IrrigationPlan() {
   };
 
   return (
-    <Card className="shadow-lg">
+    <Card className="shadow-lg w-full max-w-4xl mx-auto">
       <CardHeader>
-        <CardTitle>{t('irrigationPlan.title')}</CardTitle>
-        <CardDescription>{t('irrigationPlan.description')}</CardDescription>
+        <CardTitle className="text-2xl font-bold text-center">{t('irrigationPlan.title')}</CardTitle>
+        <CardDescription className="text-center">{t('irrigationPlan.description')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>

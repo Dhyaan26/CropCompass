@@ -56,10 +56,10 @@ export default function GovtSchemes() {
     };
 
     return (
-        <Card className="shadow-lg">
+        <Card className="shadow-lg w-full max-w-4xl mx-auto">
             <CardHeader>
-                <CardTitle>{t('govtSchemes.title')}</CardTitle>
-                <CardDescription>{t('govtSchemes.description')}</CardDescription>
+                <CardTitle className="text-2xl font-bold text-center">{t('govtSchemes.title')}</CardTitle>
+                <CardDescription className="text-center">{t('govtSchemes.description')}</CardDescription>
             </CardHeader>
             <CardContent>
                 <Form {...form}>
