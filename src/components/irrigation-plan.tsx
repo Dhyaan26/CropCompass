@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -16,11 +17,13 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, CalendarClock, Recycle } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
   cropType: z.string().min(2, { message: "Crop type is required." }),
   soilType: z.string().min(2, { message: "Soil type is required." }),
-  location: z.string().min(2, { message: "Location is required." }),
+  state: z.string({ required_error: "Please select a state." }),
+  district: z.string({ required_error: "Please select a district." }),
   waterAccess: z.string().min(5, { message: "Describe your water access." }),
 });
 
@@ -28,23 +31,31 @@ export default function IrrigationPlan() {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<CalculateIrrigationScheduleOutput | null>(null);
+  const [selectedState, setSelectedState] = useState<string>("");
   const { toast } = useToast();
+
+  const indianStates = t('indianStates') as any;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       cropType: "",
       soilType: "",
-      location: "",
       waterAccess: "",
     },
   });
 
-  const onSubmit: SubmitHandler<CalculateIrrigationScheduleInput> = async (data) => {
+  const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     setLoading(true);
     setResult(null);
     try {
-      const response = await calculateIrrigationSchedule(data);
+      const input: CalculateIrrigationScheduleInput = {
+        location: `${data.district}, ${data.state}`,
+        cropType: data.cropType,
+        soilType: data.soilType,
+        waterAccess: data.waterAccess,
+      }
+      const response = await calculateIrrigationSchedule(input);
       setResult(response);
     } catch (error) {
       console.error("Error calculating irrigation schedule:", error);
@@ -57,6 +68,15 @@ export default function IrrigationPlan() {
       setLoading(false);
     }
   };
+
+  const handleStateChange = (value: string) => {
+    setSelectedState(value);
+    form.setValue("state", value);
+    form.resetField("district");
+  }
+
+  const districtsForSelectedState = selectedState && indianStates[selectedState] ? indianStates[selectedState] : [];
+
 
   return (
     <Card className="shadow-lg w-full max-w-4xl mx-auto">
@@ -96,13 +116,44 @@ export default function IrrigationPlan() {
               />
               <FormField
                 control={form.control}
-                name="location"
+                name="state"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{t('irrigationPlan.locationLabel')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('irrigationPlan.locationPlaceholder')} {...field} />
-                    </FormControl>
+                    <FormLabel>{t('cropSuggestion.stateLabel')}</FormLabel>
+                    <Select onValueChange={handleStateChange}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder={t('cropSuggestion.statePlaceholder')} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {Object.keys(indianStates).sort().map(state => (
+                                <SelectItem key={state} value={state}>{state}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+               <FormField
+                control={form.control}
+                name="district"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t('cropSuggestion.districtLabel')}</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value} disabled={!selectedState}>
+                        <FormControl>
+                            <SelectTrigger>
+                                <SelectValue placeholder={t('cropSuggestion.districtPlaceholder')} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                            {districtsForSelectedState && districtsForSelectedState.sort().map((district: string) => (
+                                <SelectItem key={district} value={district}>{district}</SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -111,7 +162,7 @@ export default function IrrigationPlan() {
                 control={form.control}
                 name="waterAccess"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="md:col-span-2">
                     <FormLabel>{t('irrigationPlan.waterAccessLabel')}</FormLabel>
                     <FormControl>
                       <Input placeholder={t('irrigationPlan.waterAccessPlaceholder')} {...field} />
