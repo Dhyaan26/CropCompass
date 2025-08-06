@@ -13,10 +13,10 @@ import {
     SidebarFooter,
     SidebarInset,
 } from "@/components/ui/sidebar"
-import { BarChartBig, Droplets, Home, Landmark, Leaf, LineChart, Trees, Download, Bug } from "lucide-react";
+import { BarChartBig, Droplets, Home, Landmark, Leaf, LineChart, Trees, Download, Bug, ArrowLeft } from "lucide-react";
 import LanguageSwitcher from "@/components/language-switcher";
 import { useTranslation } from "@/hooks/use-translation";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -27,6 +27,7 @@ export default function DashboardLayout({
 }) {
     const { t } = useTranslation();
     const pathname = usePathname();
+    const router = useRouter();
 
     const handleDownload = () => {
         try {
@@ -62,7 +63,7 @@ export default function DashboardLayout({
                         <SidebarMenu>
                             {menuItems.map((item) => (
                                 <SidebarMenuItem key={item.href}>
-                                    <Link href={item.href} legacyBehavior passHref>
+                                    <Link href={item.href}>
                                         <SidebarMenuButton isActive={pathname === item.href}>
                                             <item.icon />
                                             <span>{item.label}</span>
@@ -79,6 +80,18 @@ export default function DashboardLayout({
                 <SidebarInset>
                     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 print:hidden">
                         <SidebarTrigger className="sm:hidden" />
+                         <div className="flex items-center gap-2">
+                            {pathname !== '/dashboard' && (
+                                <Button variant="outline" size="icon" onClick={() => router.back()}>
+                                    <ArrowLeft className="h-4 w-4" />
+                                </Button>
+                            )}
+                             <Button variant="outline" size="icon" asChild>
+                                <Link href="/dashboard">
+                                    <Home className="h-4 w-4" />
+                                </Link>
+                            </Button>
+                        </div>
                         <div className="flex items-center gap-2 ml-auto">
                             <Button onClick={handleDownload}>
                                 <Download className="mr-2 h-4 w-4" />
