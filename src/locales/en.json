@@ -21,7 +21,8 @@
         "dataInsights": "Farm Data Analytics",
         "dashboard": "Dashboard",
         "aiAssistant": "AI Assistant",
-        "pestDetection": "Pest Detection"
+        "pestDetection": "Pest Detection",
+        "marketPrice": "Market Prices"
     },
     "cropsuggestions": {
         "description": "Get AI-driven crop recommendations based on your farm's conditions.",
@@ -46,6 +47,10 @@
     "pestdetection": {
         "description": "Detect pests and diseases in your crops by uploading a photo.",
         "description_short": "Detect crop pests and diseases by uploading a photo."
+    },
+    "marketprice": {
+        "description": "Get AI-powered market price estimates for your produce.",
+        "description_short": "Get AI price estimates for your produce."
     },
     "aiassistant": {
         "description": "Ask our AI assistant anything about farming and agriculture."
@@ -168,6 +173,21 @@
             "noPlantDesc": "The AI could not confirm that the uploaded image contains a plant. Please try another photo."
         }
     },
+    "marketPrice": {
+        "title": "Market Price Checker",
+        "description": "Get AI-powered price estimates for agricultural products based on your location.",
+        "productNameLabel": "Product Name",
+        "productNamePlaceholder": "E.g., Onion, Tomato",
+        "locationLabel": "Market Location",
+        "locationPlaceholder": "E.g., Nashik, Pune",
+        "button": "Get Price",
+        "gettingPrice": "Getting Price...",
+        "results": {
+            "averagePrice": "Average Price",
+            "marketTrends": "Market Trends",
+            "priceFactors": "Price Influencing Factors"
+        }
+    },
     "chatAssistant": {
         "title": "AI Farming Assistant",
         "description": "Ask me anything about farming!",
@@ -185,6 +205,7 @@
         "aiInsightsError": "Failed to analyze data. Please try again.",
         "pestDetectionError": "Failed to diagnose plant. Please check the image and try again.",
         "fileSelectError": "Please select a file to analyze.",
-        "chatAssistantError": "Failed to get a response from the assistant. Please try again."
+        "chatAssistantError": "Failed to get a response from the assistant. Please try again.",
+        "marketPriceError": "Failed to get market price. Please try again."
     }
 }

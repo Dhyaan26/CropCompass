@@ -12,4 +12,5 @@ if (process.env.GENKIT_DEV_SERVER) {
     import('@/ai/flows/find-govt-schemes.ts');
     import('@/ai/flows/chat-assistant.ts');
     import('@/ai/flows/diagnose-plant.ts');
+    import('@/ai/flows/get-market-price.ts');
 }
