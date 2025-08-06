@@ -190,6 +190,8 @@
         "smallFarmer": "Small Farmer (1-2 hectares)",
         "marginalFarmer": "Marginal Farmer (less than 1 hectare)",
         "largeFarmer": "Large Farmer (more than 2 hectares)",
+        "annualIncomeLabel": "Annual Income (INR)",
+        "annualIncomePlaceholder": "e.g., 1,50,000",
         "button": "Find Schemes",
         "searching": "Searching...",
         "results": {
@@ -197,7 +199,9 @@
             "benefits": "Benefits",
             "documents": "Documents Required",
             "application": "How to Apply",
-            "noSchemes": "No specific schemes found for the provided details. Try broadening your search."
+            "noSchemesFound": "No specific {{type}} schemes found for the provided details. Try broadening your search.",
+            "centralSchemes": "Central Schemes",
+            "stateSchemes": "State Schemes"
         }
     },
     "aiInsights": {
