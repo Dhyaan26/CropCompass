@@ -5,7 +5,7 @@ import AppHeader from '@/components/header';
 import { useTranslation } from '@/hooks/use-translation';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight, BarChartBig, Bug, Droplets, Landmark, LineChart, Trees, Bot, IndianRupee, PieChart } from 'lucide-react';
+import { ArrowRight, BarChartBig, Bug, Droplets, Landmark, LineChart, Trees, Bot, IndianRupee, PieChart, Package } from 'lucide-react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import dynamic from 'next/dynamic';
@@ -25,6 +25,7 @@ export default function Home() {
         { href: "/dashboard/data-insights", icon: BarChartBig, text: t('tabs.dataInsights'), description: t('farmdataanalytics.description_short') },
         { href: "/dashboard/pest-disease-detection", icon: Bug, text: t('tabs.pestDetection'), description: t('pestdetection.description_short') },
         { href: "/dashboard/crop-distribution", icon: PieChart, text: t('tabs.cropDistribution'), description: t('cropdistribution.description_short') },
+        { href: "/dashboard/inventory", icon: Package, text: t('tabs.inventory'), description: t('inventory.description_short') },
     ];
 
   return (

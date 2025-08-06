@@ -22,7 +22,8 @@
         "aiAssistant": "एआई सहायक",
         "pestDetection": "कीट पहचान",
         "marketPrice": "बाजार मूल्य",
-        "cropDistribution": "फसल वितरण"
+        "cropDistribution": "फसल वितरण",
+        "inventory": "इन्वेंटरी"
     },
     "cropsuggestions": {
         "description": "अपने खेत की स्थितियों के आधार पर AI-संचालित फसल सिफारिशें प्राप्त करें।",
@@ -63,6 +64,41 @@
         "pieChart": "पाई चार्ट",
         "button": "ग्राफ उत्पन्न करें",
         "generating": "उत्पन्न हो रहा है..."
+    },
+    "inventory": {
+        "description": "उर्वरकों, कीटनाशकों और अन्य कृषि आपूर्तियों के अपने स्टॉक को ट्रैक करें।",
+        "description_short": "कृषि आपूर्तियों के अपने स्टॉक को ट्रैक करें।",
+        "title": "इन्वेंटरी प्रबंधन",
+        "addItem": "नया आइटम जोड़ें",
+        "itemName": "वस्तु का नाम",
+        "itemNamePlaceholder": "जैसे, यूरिया उर्वरक",
+        "quantity": "मात्रा",
+        "unit": "इकाई",
+        "unitPlaceholder": "जैसे, किग्रा, लीटर, इकाइयाँ",
+        "addItemButton": "आइटम जोड़ें",
+        "currentStock": "वर्तमान स्टॉक",
+        "actions": "कार्रवाइयाँ",
+        "noItems": "इन्वेंट्री में कोई आइटम नहीं है। आरंभ करने के लिए ऊपर एक जोड़ें।",
+        "logHistoryFor": "के लिए लॉग इतिहास",
+        "date": "तारीख",
+        "action": "कार्रवाई",
+        "quantityChange": "मात्रा में परिवर्तन",
+        "notes": "टिप्पणियाँ",
+        "addStock": "स्टॉक जोड़ें",
+        "useStock": "स्टॉक का उपयोग करें",
+        "notesPlaceholder": "वैकल्पिक नोट्स...",
+        "updateQuantity": "मात्रा अपडेट करें",
+        "areYouSure": "क्या आप निश्चित हैं?",
+        "deleteWarning": "यह कार्रवाई पूर्ववत नहीं की जा सकती। यह आपकी इन्वेंट्री से आइटम को स्थायी रूप से हटा देगा।",
+        "cancel": "रद्द करें",
+        "confirmDelete": "हाँ, इसे हटा दें",
+        "toasts": {
+            "itemAdded": "आइटम जोड़ा गया",
+            "quantityUpdated": "मात्रा अपडेट की गई",
+            "itemDeleted": "आइटम हटा दिया गया",
+            "invalidQuantity": "अमान्य मात्रा",
+            "notEnoughStock": "इस क्रिया को करने के लिए पर्याप्त स्टॉक नहीं है।"
+        }
     },
     "aiassistant": {
         "description": "हमारे AI सहायक से खेती और कृषि के बारे में कुछ भी पूछें।"

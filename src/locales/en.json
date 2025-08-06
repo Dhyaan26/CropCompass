@@ -23,7 +23,8 @@
         "aiAssistant": "AI Assistant",
         "pestDetection": "Pest Detection",
         "marketPrice": "Market Prices",
-        "cropDistribution": "Crop Distribution"
+        "cropDistribution": "Crop Distribution",
+        "inventory": "Inventory"
     },
     "cropsuggestions": {
         "description": "Get AI-driven crop recommendations based on your farm's conditions.",
@@ -64,6 +65,41 @@
         "pieChart": "Pie Chart",
         "button": "Generate Graph",
         "generating": "Generating..."
+    },
+    "inventory": {
+        "description": "Track your stock of fertilizers, pesticides, and other farm supplies.",
+        "description_short": "Track your stock of farm supplies.",
+        "title": "Inventory Management",
+        "addItem": "Add New Item",
+        "itemName": "Item Name",
+        "itemNamePlaceholder": "e.g., Urea Fertilizer",
+        "quantity": "Quantity",
+        "unit": "Unit",
+        "unitPlaceholder": "e.g., kg, L, units",
+        "addItemButton": "Add Item",
+        "currentStock": "Current Stock",
+        "actions": "Actions",
+        "noItems": "No items in inventory. Add one above to get started.",
+        "logHistoryFor": "Log History for",
+        "date": "Date",
+        "action": "Action",
+        "quantityChange": "Quantity Change",
+        "notes": "Notes",
+        "addStock": "Add Stock",
+        "useStock": "Use Stock",
+        "notesPlaceholder": "Optional notes...",
+        "updateQuantity": "Update Quantity",
+        "areYouSure": "Are you sure?",
+        "deleteWarning": "This action cannot be undone. This will permanently delete the item from your inventory.",
+        "cancel": "Cancel",
+        "confirmDelete": "Yes, delete it",
+        "toasts": {
+            "itemAdded": "Item Added",
+            "quantityUpdated": "Quantity Updated",
+            "itemDeleted": "Item Deleted",
+            "invalidQuantity": "Invalid Quantity",
+            "notEnoughStock": "Not enough stock to perform this action."
+        }
     },
     "aiassistant": {
         "description": "Ask our AI assistant anything about farming and agriculture."
