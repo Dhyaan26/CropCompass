@@ -1,12 +1,12 @@
 
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { UploadCloud, Loader2, Microscope, TestTube, ShieldCheck, Leaf, AlertTriangle, MapPin, ExternalLink, ShoppingCart } from 'lucide-react';
+import { UploadCloud, Loader2, Microscope, TestTube, ShieldCheck, Leaf, AlertTriangle, MapPin, ExternalLink, ShoppingCart, LocateFixed } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import {
     diagnosePlant,
@@ -17,13 +17,15 @@ import { useTranslation } from '@/hooks/use-translation';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
 import Link from 'next/link';
+import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 
 export default function PestDiseaseDetection() {
     const { t } = useTranslation();
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [description, setDescription] = useState("");
-    const [location, setLocation] = useState("");
+    const [location, setLocation] = useState<string | null>(null);
+    const [locationError, setLocationError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<DiagnosePlantOutput | null>(null);
     const { toast } = useToast();
@@ -43,6 +45,51 @@ export default function PestDiseaseDetection() {
             setPreviewUrl(null);
         }
     }
+    
+    const requestLocation = () => {
+        setLocationError(null);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const { latitude, longitude } = position.coords;
+                    try {
+                        // Using a free, open reverse geocoding API
+                        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
+                        const data = await response.json();
+                        const city = data.address.city || data.address.town || data.address.village || '';
+                        const state = data.address.state || '';
+                        const country = data.address.country || '';
+                        setLocation(`${city}, ${state}, ${country}`);
+                    } catch (error) {
+                        console.error("Reverse geocoding failed:", error);
+                        // Fallback to coordinates if geocoding fails
+                        setLocation(`${latitude}, ${longitude}`);
+                    }
+                },
+                (error) => {
+                    console.error("Error getting location:", error);
+                    let message = "Could not retrieve your location. Please ensure location services are enabled.";
+                    if (error.code === error.PERMISSION_DENIED) {
+                        message = "Location access was denied. Please enable it in your browser settings to use this feature.";
+                    }
+                    setLocationError(message);
+                    toast({
+                        variant: "destructive",
+                        title: "Location Error",
+                        description: message,
+                    });
+                }
+            );
+        } else {
+            const message = "Geolocation is not supported by this browser.";
+            setLocationError(message);
+             toast({
+                variant: "destructive",
+                title: "Location Error",
+                description: message,
+            });
+        }
+    };
 
     const handleAnalyze = async () => {
         if (!file || !previewUrl) {
@@ -120,11 +167,18 @@ export default function PestDiseaseDetection() {
                         </div>
                         <Input id="file-upload" type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange} accept="image/*" />
 
-                        <Input 
-                            placeholder={t('pestDetection.locationPlaceholder')}
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
-                        />
+                         <Button onClick={requestLocation} variant="outline">
+                            <LocateFixed className="mr-2 h-4 w-4" />
+                            {location ? `Location: ${location}` : "Get Current Location"}
+                        </Button>
+
+                         {locationError && (
+                            <Alert variant="destructive">
+                                <AlertTitle>Location Error</AlertTitle>
+                                <AlertDescription>{locationError}</AlertDescription>
+                            </Alert>
+                        )}
+
 
                         <Textarea
                             placeholder={t('pestDetection.descriptionPlaceholder')}
@@ -264,3 +318,5 @@ export default function PestDiseaseDetection() {
         </Card>
     );
 }
+
+    
