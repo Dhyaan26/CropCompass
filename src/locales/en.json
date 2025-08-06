@@ -75,7 +75,7 @@
         "itemNamePlaceholder": "e.g., Urea Fertilizer",
         "quantity": "Quantity",
         "unit": "Unit",
-        "unitPlaceholder": "e.g., kg, L, units",
+        "unitPlaceholder": "Select a unit",
         "addItemButton": "Add Item",
         "currentStock": "Current Stock",
         "actions": "Actions",

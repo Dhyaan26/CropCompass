@@ -24,6 +24,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 
 type InventoryItem = {
@@ -42,10 +43,12 @@ type LogEntry = {
     notes: string;
 };
 
+const metricUnits = ['kg', 'g', 'L', 'mL', 'units', 'packets', 'bottles'];
+
 const formSchema = z.object({
     name: z.string().min(2, { message: 'Item name must be at least 2 characters.' }),
     quantity: z.preprocess((a) => parseFloat(z.string().parse(a)), z.number().positive({ message: 'Quantity must be a positive number.' })),
-    unit: z.string().min(1, { message: 'Unit is required (e.g., kg, L, units).' }),
+    unit: z.string({ required_error: 'Please select a unit.' }),
 });
 
 const updateQuantitySchema = z.object({
@@ -61,7 +64,7 @@ export default function Inventory() {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: { name: '', quantity: 0, unit: '' },
+        defaultValues: { name: '', quantity: 0 },
     });
     
     const updateQuantityForm = useForm<z.infer<typeof updateQuantitySchema>>({
@@ -210,7 +213,18 @@ export default function Inventory() {
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>{t('inventory.unit')}</FormLabel>
-                                            <FormControl><Input placeholder={t('inventory.unitPlaceholder')} {...field} /></FormControl>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
+                                                        <SelectTrigger>
+                                                            <SelectValue placeholder={t('inventory.unitPlaceholder')} />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent>
+                                                        {metricUnits.map(unit => (
+                                                            <SelectItem key={unit} value={unit}>{unit}</SelectItem>
+                                                        ))}
+                                                    </SelectContent>
+                                                </Select>
                                             <FormMessage />
                                         </FormItem>
                                     )}
