@@ -17,7 +17,8 @@
         "yieldPrediction": "Yield Prediction",
         "govtSchemes": "Govt. Schemes",
         "dataInsights": "Data Insights",
-        "dashboard": "Dashboard"
+        "dashboard": "Dashboard",
+        "aiAssistant": "AI Assistant"
     },
     "cropSuggestion": {
         "title": "Soil & Crop Recommendations",
@@ -111,6 +112,11 @@
             "description": "Here are the AI-powered insights from your data."
         }
     },
+    "chatAssistant": {
+        "title": "AI Farming Assistant",
+        "description": "Ask me anything about farming!",
+        "placeholder": "Type your question here..."
+    },
     "footer": {
         "copyright": "AgroGPT. Powered by AI for a greener tomorrow."
     },
@@ -121,6 +127,7 @@
         "yieldPredictionError": "Failed to predict yield. Please try again.",
         "govtSchemesError": "Failed to find government schemes. Please try again.",
         "aiInsightsError": "Failed to analyze data. Please try again.",
-        "fileSelectError": "Please select a file to analyze."
+        "fileSelectError": "Please select a file to analyze.",
+        "chatAssistantError": "Failed to get a response from the assistant. Please try again."
     }
 }

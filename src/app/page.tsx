@@ -6,9 +6,10 @@ import CropSuggestion from '@/components/crop-suggestion';
 import GovtSchemes from '@/components/govt-schemes';
 import IrrigationPlan from '@/components/irrigation-plan';
 import YieldPrediction from '@/components/yield-prediction';
+import ChatAssistant from '@/components/chat-assistant';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTranslation } from '@/hooks/use-translation';
-import { BarChartBig, Droplets, Landmark, LineChart, Trees } from 'lucide-react';
+import { BarChartBig, Droplets, Landmark, LineChart, Trees, Bot } from 'lucide-react';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -19,6 +20,7 @@ export default function Home() {
       { value: "yield-prediction", icon: LineChart, label: t('tabs.yieldPrediction'), component: <YieldPrediction /> },
       { value: "govt-schemes", icon: Landmark, label: t('tabs.govtSchemes'), component: <GovtSchemes /> },
       { value: "data-insights", icon: BarChartBig, label: t('tabs.dataInsights'), component: <AiInsights /> },
+      { value: "ai-assistant", icon: Bot, label: t('tabs.aiAssistant'), component: <ChatAssistant /> },
   ];
 
   return (
@@ -34,7 +36,7 @@ export default function Home() {
                 </p>
             </div>
             <Tabs defaultValue="crop-suggestions" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-5 h-auto">
+                <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto">
                     {features.map((feature) => (
                         <TabsTrigger value={feature.value} key={feature.value} className="flex flex-col sm:flex-row gap-2 h-auto py-2">
                             <feature.icon className="h-5 w-5" />
