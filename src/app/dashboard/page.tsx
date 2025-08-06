@@ -1,8 +1,9 @@
+
 "use client";
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslation } from "@/hooks/use-translation";
-import { BarChartBig, Droplets, Landmark, LineChart, Trees, Bug } from "lucide-react";
+import { BarChartBig, Droplets, Landmark, LineChart, Trees, Bug, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 
@@ -16,6 +17,7 @@ export default function DashboardPage() {
         { href: "/dashboard/govt-schemes", icon: Landmark, text: t('tabs.govtSchemes') },
         { href: "/dashboard/farm-data-analytics", icon: BarChartBig, text: t('tabs.dataInsights') },
         { href: "/dashboard/pest-disease-detection", icon: Bug, text: t('tabs.pestDetection') },
+        { href: "/dashboard/ai-assistant", icon: MessageSquare, text: t('tabs.aiAssistant') },
     ];
 
     return (
@@ -36,7 +38,6 @@ export default function DashboardPage() {
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>
-                                    {/* You can add specific descriptions for each feature in your translation files */}
                                     {t(
                                         `${feature.text.toLowerCase().replace(/ /g, '')}.description`, 
                                         {fallback: `Access the ${feature.text} module.`}

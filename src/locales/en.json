@@ -5,8 +5,9 @@
         "downloadReport": "Download Report"
     },
     "home": {
-        "title": "Comprehensive Farming Plan",
-        "subtitle": "Get personalized recommendations for your farm, from crop selection and irrigation schedules to government schemes, all powered by AI."
+        "title": "Welcome to CropCompass",
+        "subtitle": "Your AI-powered partner for intelligent farming. Get personalized recommendations for crop selection, irrigation schedules, pest detection, and more.",
+        "cta": "Go to Dashboard"
     },
     "dashboard": {
         "title": "Your Farming Dashboard",
