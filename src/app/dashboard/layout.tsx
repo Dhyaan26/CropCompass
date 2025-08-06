@@ -54,7 +54,7 @@ export default function DashboardLayout({
                     <SidebarHeader>
                         <div className="flex items-center gap-2">
                              <Leaf className="h-8 w-8 text-primary" />
-                             <h1 className="text-xl font-semibold text-primary font-headline">AgroGPT</h1>
+                             <h1 className="text-xl font-semibold text-primary font-headline">CropCompass</h1>
                         </div>
                     </SidebarHeader>
                     <SidebarContent>

@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { LanguageProvider } from '@/context/language-context';
 
 export const metadata: Metadata = {
-  title: 'AgroGPT: Smart Farming Assistant',
+  title: 'CropCompass: Smart Farming Assistant',
   description: 'Your Agentic AI assistant for Indian farmers and agricultural advisors.',
 };
 

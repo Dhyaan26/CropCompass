@@ -146,7 +146,7 @@
         "placeholder": "Type your question here..."
     },
     "footer": {
-        "copyright": "AgroGPT. Powered by AI for a greener tomorrow."
+        "copyright": "CropCompass. Powered by AI for a greener tomorrow."
     },
     "toasts": {
         "error": "Error",

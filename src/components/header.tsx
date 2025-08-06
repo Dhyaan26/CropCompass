@@ -15,7 +15,7 @@ export default function AppHeader() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-3">
           <Leaf className="h-8 w-8 text-primary" />
-          <h1 className="text-2xl font-bold text-primary font-headline">AgroGPT</h1>
+          <h1 className="text-2xl font-bold text-primary font-headline">CropCompass</h1>
         </Link>
         <p className="hidden md:block text-muted-foreground">{t('header.tagline')}</p>
         <div className="flex items-center gap-2">
