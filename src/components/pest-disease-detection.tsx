@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { UploadCloud, Loader2, Microscope, TestTube, ShieldCheck, Leaf, AlertTriangle, MapPin } from 'lucide-react';
+import { UploadCloud, Loader2, Microscope, TestTube, ShieldCheck, Leaf, AlertTriangle, MapPin, ExternalLink, ShoppingCart } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import {
     diagnosePlant,
@@ -204,8 +204,8 @@ export default function PestDiseaseDetection() {
                                         {renderTreatmentMethods(result.treatment.chemical)}
                                     </div>
                                      {result.googleMapsSearchLink && (
-                                        <div className="pt-4">
-                                            <Button asChild>
+                                        <div className="pt-2">
+                                            <Button asChild size="sm">
                                                 <Link href={result.googleMapsSearchLink} target="_blank" rel="noopener noreferrer">
                                                     <MapPin className="mr-2 h-4 w-4" />
                                                     {t('pestDetection.results.findStores')}
@@ -213,6 +213,24 @@ export default function PestDiseaseDetection() {
                                             </Button>
                                         </div>
                                     )}
+                                </CardContent>
+                            </Card>
+                        )}
+
+                        {result && result.ecommerceLinks.length > 0 && (
+                            <Card>
+                                <CardHeader>
+                                    <CardTitle className="flex items-center gap-2"><ShoppingCart /> {t('pestDetection.results.buyOnline')}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex flex-wrap gap-2">
+                                    {result.ecommerceLinks.map((link) => (
+                                        <Button asChild key={link.siteName} variant="secondary" size="sm">
+                                            <Link href={link.searchUrl} target="_blank" rel="noopener noreferrer">
+                                                Search on {link.siteName}
+                                                <ExternalLink className="ml-2 h-4 w-4" />
+                                            </Link>
+                                        </Button>
+                                    ))}
                                 </CardContent>
                             </Card>
                         )}

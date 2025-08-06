@@ -44,6 +44,10 @@ const DiagnosePlantOutputSchema = z.object({
   }),
   prevention: z.array(z.string()).describe('A list of tips to prevent this issue in the future.'),
   googleMapsSearchLink: z.string().describe("A Google Maps URL that searches for 'agricultural supply stores' in the user's provided location. Will be an empty string if no disease is detected."),
+  ecommerceLinks: z.array(z.object({
+    siteName: z.string().describe("The name of the e-commerce website (e.g., 'Amazon', 'Flipkart', 'BigBasket')."),
+    searchUrl: z.string().describe("A URL to search for a relevant treatment product on that e-commerce site."),
+  })).describe("A list of search links for treatment products on popular Indian e-commerce sites. Provide links for generic terms like 'pesticide' or 'fungicide' if a specific product is not available online."),
 });
 export type DiagnosePlantOutput = z.infer<typeof DiagnosePlantOutputSchema>;
 
@@ -63,6 +67,7 @@ Analyze the provided image and description.
 3.  **Treatment**: Suggest specific organic and chemical treatment methods. For each method/pesticide, provide an estimated price range in Indian Rupees (₹).
 4.  **Prevention**: Provide actionable tips to prevent the problem from recurring.
 5.  **Find Stores**: If a disease or pest is identified, create a Google Maps search link for "agricultural supply stores" in the user's location. The URL should be in the format: \`https://www.google.com/maps/search/?api=1&query=agricultural+supply+stores+in+<LOCATION>\`. Replace <LOCATION> with the user's location.
+6.  **E-commerce Links**: If a treatment is recommended, generate product search URLs for the suggested chemical or organic products (e.g., 'Neem Oil', 'Fungicide') on at least 2 major Indian e-commerce websites (like Amazon.in, Flipkart, BigBasket).
 
 User's Location: {{{location}}}
 User's Description: {{{description}}}

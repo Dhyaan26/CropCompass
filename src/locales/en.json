@@ -173,7 +173,8 @@
             "prevention": "Prevention Tips",
             "noPlant": "Plant Not Detected",
             "noPlantDesc": "The AI could not confirm that the uploaded image contains a plant. Please try another photo.",
-            "findStores": "Find Nearby Stores"
+            "findStores": "Find Nearby Stores",
+            "buyOnline": "Buy Online"
         }
     },
     "marketPrice": {
