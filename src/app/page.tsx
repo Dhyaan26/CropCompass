@@ -8,6 +8,10 @@ import Link from 'next/link';
 import { ArrowRight, BarChartBig, Bug, Droplets, Landmark, LineChart, Trees, Bot, IndianRupee } from 'lucide-react';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import dynamic from 'next/dynamic';
+
+const ChatWidget = dynamic(() => import('@/components/chat-widget'), { ssr: false });
+
 
 export default function Home() {
   const { t } = useTranslation();
@@ -90,6 +94,7 @@ export default function Home() {
           <p>&copy; {new Date().getFullYear()} {t('footer.copyright')}</p>
         </div>
       </footer>
+      <ChatWidget />
     </div>
   );
 }
