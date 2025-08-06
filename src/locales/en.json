@@ -24,22 +24,28 @@
         "pestDetection": "Pest Detection"
     },
     "cropsuggestions": {
-        "description": "Get AI-driven crop recommendations based on your farm's conditions."
+        "description": "Get AI-driven crop recommendations based on your farm's conditions.",
+        "description_short": "Get AI-driven crop recommendations for your farm."
     },
     "irrigationplan": {
-        "description": "Generate a tailored irrigation schedule to optimize water usage."
+        "description": "Generate a tailored irrigation schedule to optimize water usage.",
+        "description_short": "Optimize water usage with a tailored irrigation schedule."
     },
     "yieldprediction": {
-        "description": "Estimate your potential crop yield with our predictive analysis."
+        "description": "Estimate your potential crop yield with our predictive analysis.",
+        "description_short": "Estimate your potential crop yield with predictive analysis."
     },
     "govtschemes": {
-        "description": "Find relevant government schemes for your farming needs."
+        "description": "Find relevant government schemes for your farming needs.",
+        "description_short": "Find relevant government schemes for your needs."
     },
     "farmdataanalytics": {
-        "description": "Analyze your farm data to gain insights on yields, costs, and risks."
+        "description": "Analyze your farm data to gain insights on yields, costs, and risks.",
+        "description_short": "Analyze your farm data for insights on yields and costs."
     },
     "pestdetection": {
-        "description": "Detect pests and diseases in your crops by uploading a photo."
+        "description": "Detect pests and diseases in your crops by uploading a photo.",
+        "description_short": "Detect crop pests and diseases by uploading a photo."
     },
     "aiassistant": {
         "description": "Ask our AI assistant anything about farming and agriculture."

@@ -11,12 +11,12 @@ export default function DashboardPage() {
     const { t } = useTranslation();
 
     const features = [
-        { href: "/dashboard/crop-suggestions", icon: Trees, text: t('tabs.cropSuggestions') },
-        { href: "/dashboard/irrigation-plan", icon: Droplets, text: t('tabs.irrigationPlan') },
-        { href: "/dashboard/yield-prediction", icon: LineChart, text: t('tabs.yieldPrediction') },
-        { href: "/dashboard/govt-schemes", icon: Landmark, text: t('tabs.govtSchemes') },
-        { href: "/dashboard/farm-data-analytics", icon: BarChartBig, text: t('tabs.dataInsights') },
-        { href: "/dashboard/pest-disease-detection", icon: Bug, text: t('tabs.pestDetection') },
+        { href: "/dashboard/crop-suggestions", icon: Trees, text: t('tabs.cropSuggestions'), description: t('cropsuggestions.description_short') },
+        { href: "/dashboard/irrigation-plan", icon: Droplets, text: t('tabs.irrigationPlan'), description: t('irrigationplan.description_short') },
+        { href: "/dashboard/yield-prediction", icon: LineChart, text: t('tabs.yieldPrediction'), description: t('yieldprediction.description_short') },
+        { href: "/dashboard/govt-schemes", icon: Landmark, text: t('tabs.govtSchemes'), description: t('govtschemes.description_short') },
+        { href: "/dashboard/farm-data-analytics", icon: BarChartBig, text: t('tabs.dataInsights'), description: t('farmdataanalytics.description_short') },
+        { href: "/dashboard/pest-disease-detection", icon: Bug, text: t('tabs.pestDetection'), description: t('pestdetection.description_short') },
     ];
 
     return (
@@ -29,7 +29,7 @@ export default function DashboardPage() {
 
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {features.map((feature, index) => (
-                    <Link href={feature.href} key={index}>
+                    <Link href={feature.href} key={index} className="rounded-lg transition-transform transform hover:scale-105">
                         <Card className="shadow-lg hover:shadow-xl transition-shadow h-full">
                             <CardHeader className="flex-row items-center gap-4">
                                 <feature.icon className="h-10 w-10 text-accent" />
@@ -37,10 +37,7 @@ export default function DashboardPage() {
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>
-                                    {t(
-                                        `${feature.text.toLowerCase().replace(/ /g, '').replace(/\./g, '')}.description`, 
-                                        {fallback: `Access the ${feature.text} module.`}
-                                    )}
+                                    {feature.description}
                                 </CardDescription>
                             </CardContent>
                         </Card>
