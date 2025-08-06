@@ -19,8 +19,13 @@ const CalculateIrrigationScheduleInputSchema = z.object({
 });
 export type CalculateIrrigationScheduleInput = z.infer<typeof CalculateIrrigationScheduleInputSchema>;
 
+const ScheduleEntrySchema = z.object({
+  date: z.string().describe("The date for the watering event in 'YYYY-MM-DD' format."),
+  task: z.string().describe("The specific watering instruction for that day, e.g., 'Water for 30 minutes in the morning.'"),
+});
+
 const CalculateIrrigationScheduleOutputSchema = z.object({
-  irrigationSchedule: z.string().describe('The recommended irrigation schedule.'),
+  schedule: z.array(ScheduleEntrySchema).describe('A 30-day watering schedule starting from today.'),
   waterConservationTips: z.string().describe('Tips for water conservation.'),
 });
 export type CalculateIrrigationScheduleOutput = z.infer<typeof CalculateIrrigationScheduleOutputSchema>;
@@ -33,9 +38,13 @@ const prompt = ai.definePrompt({
   name: 'calculateIrrigationSchedulePrompt',
   input: {schema: CalculateIrrigationScheduleInputSchema},
   output: {schema: CalculateIrrigationScheduleOutputSchema},
-  prompt: `You are an expert agricultural advisor specializing in irrigation. Based on the crop type, soil conditions, location, and weather forecasts, create an irrigation schedule.  Also suggest water conservation techniques.
+  prompt: `You are an expert agricultural advisor specializing in irrigation. Based on the crop type, soil conditions, location, and weather forecasts, create a detailed 30-day irrigation schedule starting from today.
+
+The output must be a structured calendar of events. Also provide general water conservation techniques.
 
 Provide the entire response in the following language: {{{language}}}.
+
+Today's date is {{currentDate}}.
 
 Crop Type: {{{cropType}}}
 Soil Type: {{{soilType}}}
@@ -50,7 +59,11 @@ const calculateIrrigationScheduleFlow = ai.defineFlow(
     outputSchema: CalculateIrrigationScheduleOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const {output} = await prompt({
+      ...input,
+      // @ts-ignore
+      currentDate: new Date().toLocaleDateString('en-CA')
+    });
     return output!;
   }
 );

@@ -16,9 +16,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, CalendarClock, Recycle } from "lucide-react";
+import { Loader2, CalendarClock, Recycle, Droplets } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Calendar } from "./ui/calendar";
+import { addDays, format } from "date-fns";
 
 const soilTypes = [
     "Alluvial Soil",
@@ -39,13 +41,19 @@ const formSchema = z.object({
   waterAccess: z.string().min(5, { message: "Describe your water access." }),
 });
 
+type ScheduleEntry = {
+    date: Date;
+    task: string;
+};
+
 export default function IrrigationPlan() {
   const { t, language } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<CalculateIrrigationScheduleOutput | null>(null);
   const [selectedState, setSelectedState] = useState<string>("");
   const { toast } = useToast();
-
+  const [selectedDay, setSelectedDay] = useState<Date | undefined>(new Date());
+  
   const indianStates = t('indianStates') as any;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,6 +63,15 @@ export default function IrrigationPlan() {
       waterAccess: "",
     },
   });
+  
+  const scheduleMap = result?.schedule.reduce((acc, item) => {
+    // The date from AI is YYYY-MM-DD, but JS Date constructor treats it as UTC.
+    // To avoid timezone issues, append T00:00:00 to treat it as local time.
+    const date = new Date(`${item.date}T00:00:00`);
+    acc.set(format(date, 'yyyy-MM-dd'), item.task);
+    return acc;
+  }, new Map<string, string>());
+
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
     setLoading(true);
@@ -208,33 +225,73 @@ export default function IrrigationPlan() {
         </Form>
 
         {result && (
-          <div className="mt-8 space-y-6">
-            <Card>
-              <CardHeader className="flex flex-row items-center gap-4">
-                <CalendarClock className="h-8 w-8 text-accent" />
-                <div>
-                  <CardTitle>{t('irrigationPlan.results.schedule')}</CardTitle>
-                  <CardDescription>{t('irrigationPlan.results.scheduleDesc')}</CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="whitespace-pre-wrap text-muted-foreground">{result.irrigationSchedule}</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader className="flex flex-row items-center gap-4">
-                <Recycle className="h-8 w-8 text-accent" />
-                <div>
-                  <CardTitle>{t('irrigationPlan.results.conservation')}</CardTitle>
-                  <CardDescription>{t('irrigationPlan.results.conservationDesc')}</CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent>
-                 <p className="whitespace-pre-wrap text-muted-foreground">{result.waterConservationTips}</p>
-              </CardContent>
-            </Card>
-          </div>
+           <div className="mt-8 grid md:grid-cols-2 gap-8 items-start">
+             <Card>
+                <CardHeader className="flex flex-row items-center gap-4">
+                    <CalendarClock className="h-8 w-8 text-accent" />
+                    <div>
+                        <CardTitle>{t('irrigationPlan.results.schedule')}</CardTitle>
+                        <CardDescription>{t('irrigationPlan.results.scheduleDesc')}</CardDescription>
+                    </div>
+                </CardHeader>
+                <CardContent>
+                     <Calendar
+                        mode="single"
+                        selected={selectedDay}
+                        onSelect={setSelectedDay}
+                        disabled={{ before: new Date(), after: addDays(new Date(), 30)}}
+                        modifiers={{
+                            wateringDay: (date) => scheduleMap?.has(format(date, 'yyyy-MM-dd')) || false,
+                        }}
+                        modifiersStyles={{
+                            wateringDay: {
+                                border: "2px solid hsl(var(--primary))",
+                                color: "hsl(var(--primary))",
+                                fontWeight: 'bold'
+                            }
+                        }}
+                    />
+                    <div className="mt-4 p-4 bg-muted rounded-lg min-h-[60px]">
+                        <h4 className="font-semibold">{selectedDay ? format(selectedDay, 'PPP') : 'Select a day'}</h4>
+                        <p className="text-sm text-muted-foreground">
+                            {selectedDay && scheduleMap?.get(format(selectedDay, 'yyyy-MM-dd'))
+                                ? scheduleMap.get(format(selectedDay, 'yyyy-MM-dd'))
+                                : t('irrigationPlan.results.noTask')}
+                        </p>
+                    </div>
+                </CardContent>
+             </Card>
+             <div className="space-y-8">
+                <Card>
+                    <CardHeader className="flex flex-row items-center gap-4">
+                        <Droplets className="h-8 w-8 text-accent" />
+                        <div>
+                        <CardTitle>{t('irrigationPlan.results.legend')}</CardTitle>
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex items-center gap-4">
+                            <div className="w-8 h-8 rounded-md border-2 border-primary text-primary font-bold flex items-center justify-center">
+                                {new Date().getDate()}
+                            </div>
+                            <span className="text-sm text-muted-foreground">{t('irrigationPlan.results.wateringDay')}</span>
+                        </div>
+                    </CardContent>
+                </Card>
+                 <Card>
+                    <CardHeader className="flex flex-row items-center gap-4">
+                        <Recycle className="h-8 w-8 text-accent" />
+                        <div>
+                        <CardTitle>{t('irrigationPlan.results.conservation')}</CardTitle>
+                        <CardDescription>{t('irrigationPlan.results.conservationDesc')}</CardDescription>
+                        </div>
+                    </CardHeader>
+                    <CardContent>
+                        <p className="whitespace-pre-wrap text-muted-foreground">{result.waterConservationTips}</p>
+                    </CardContent>
+                </Card>
+             </div>
+           </div>
         )}
       </CardContent>
     </Card>

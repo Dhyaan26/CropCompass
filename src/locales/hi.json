@@ -56,7 +56,7 @@
         "description": "भारत भर में उगाई जाने वाली प्रमुख फसलों के वितरण की कल्पना करें।",
         "description_short": "भारत के लिए फसल वितरण डेटा की कल्पना करें।",
         "title": "फसल वितरण",
-        "graphTypeLabel": "चार्ट का प्रकार",
+        "chartTypeLabel": "चार्ट का प्रकार",
         "graphTypePlaceholder": "एक चार्ट प्रकार चुनें",
         "statePlaceholder": "एक राज्य चुनें (या अखिल भारतीय)",
         "barChart": "बार चार्ट",
@@ -90,12 +90,12 @@
         }
     },
     "irrigationPlan": {
-        "title": "सिंचाई योजना",
+        "title": "स्मार्ट सिंचाई कैलेंडर",
         "description": "पानी के उपयोग और फसल स्वास्थ्य को अनुकूलित करने के लिए एक अनुरूप सिंचाई कार्यक्रम उत्पन्न करें।",
         "cropTypeLabel": "फसल का प्रकार",
         "cropTypePlaceholder": "जैसे, गेहूं, गन्ना",
         "soilTypeLabel": "मिट्टी का प्रकार",
-        "soilTypePlaceholder": "जैसे, काली चिकनी, लाल दोमट",
+        "soilTypePlaceholder": "एक मिट्टी का प्रकार चुनें",
         "locationLabel": "स्थान (जैसे, जिला, राज्य)",
         "locationPlaceholder": "जैसे, नासिक, महाराष्ट्र",
         "waterAccessLabel": "पानी की पहुंच",
@@ -108,9 +108,12 @@
         "calculating": "गणना हो रही है...",
         "results": {
             "schedule": "अनुशंसित सिंचाई कार्यक्रम",
-            "scheduleDesc": "इष्टतम पानी के लिए इस कार्यक्रम का पालन करें।",
+            "scheduleDesc": "पानी देने का कार्य देखने के लिए एक दिन चुनें।",
             "conservation": "जल संरक्षण युक्तियाँ",
-            "conservationDesc": "पानी बचाने में आपकी मदद करने वाली तकनीकें।"
+            "conservationDesc": "पानी बचाने में आपकी मदद करने वाली तकनीकें।",
+            "legend": "कैलेंडर लेजेंड",
+            "wateringDay": "पानी देने का दिन",
+            "noTask": "इस दिन के लिए कोई पानी देने का कार्य नहीं है।"
         }
     },
     "yieldPrediction": {
