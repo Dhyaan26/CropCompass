@@ -20,12 +20,36 @@ import { Loader2, ListChecks, Lightbulb } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 
 const indianStates = {
-  "Andhra Pradesh": ["Anantapur", "Chittoor", "Guntur", "Krishna", "Visakhapatnam"],
-  "Karnataka": ["Bengaluru Urban", "Belagavi", "Dakshina Kannada", "Mysuru", "Shivamogga"],
-  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
-  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Salem", "Tiruchirappalli"],
-  "Uttar Pradesh": ["Lucknow", "Kanpur", "Ghaziabad", "Agra", "Varanasi"],
+  "Andhra Pradesh": ["Anantapur", "Chittoor", "East Godavari", "Guntur", "Krishna", "Kurnool", "Prakasam", "Srikakulam", "Visakhapatnam", "West Godavari"],
+  "Arunachal Pradesh": ["Tawang", "West Kameng", "East Kameng", "Papum Pare", "Lower Subansiri", "Upper Subansiri"],
+  "Assam": ["Dhubri", "Kamrup", "Nagaon", "Sonitpur", "Tinsukia"],
+  "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Purnia"],
+  "Chhattisgarh": ["Raipur", "Durg", "Bilaspur", "Korba", "Raigarh"],
+  "Goa": ["North Goa", "South Goa"],
+  "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar"],
+  "Haryana": ["Faridabad", "Gurugram", "Hisar", "Panipat", "Ambala"],
+  "Himachal Pradesh": ["Shimla", "Kangra", "Mandi", "Solan", "Una"],
+  "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Deoghar"],
+  "Karnataka": ["Bengaluru Urban", "Belagavi", "Dakshina Kannada", "Mysuru", "Shivamogga", "Tumakuru", "Udupi"],
+  "Kerala": ["Thiruvananthapuram", "Ernakulam", "Kozhikode", "Thrissur", "Kollam"],
+  "Madhya Pradesh": ["Indore", "Bhopal", "Jabalpur", "Gwalior", "Ujjain"],
+  "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad", "Thane", "Solapur"],
+  "Manipur": ["Imphal West", "Imphal East", "Thoubal", "Bishnupur"],
+  "Meghalaya": ["East Khasi Hills", "West Garo Hills", "Jaintia Hills"],
+  "Mizoram": ["Aizawl", "Lunglei", "Champhai"],
+  "Nagaland": ["Dimapur", "Kohima", "Mokokchung"],
+  "Odisha": ["Bhubaneswar", "Cuttack", "Puri", "Ganjam", "Sambalpur"],
+  "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda"],
+  "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Bikaner"],
+  "Sikkim": ["East Sikkim", "West Sikkim", "North Sikkim", "South Sikkim"],
+  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Salem", "Tiruchirappalli", "Tirunelveli", "Vellore"],
+  "Telangana": ["Hyderabad", "Warangal", "Nizamabad", "Karimnagar", "Ranga Reddy"],
+  "Tripura": ["West Tripura", "North Tripura", "South Tripura", "Dhalai"],
+  "Uttar Pradesh": ["Lucknow", "Kanpur", "Ghaziabad", "Agra", "Varanasi", "Meerut", "Allahabad"],
+  "Uttarakhand": ["Dehradun", "Haridwar", "Nainital", "Udhham Singh Nagar"],
+  "West Bengal": ["Kolkata", "Howrah", "Darjeeling", "Nadia", "Murshidabad"],
 };
+
 
 const soilTypes = [
     "Alluvial Soil",
@@ -112,7 +136,7 @@ export default function CropSuggestion() {
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {Object.keys(indianStates).map(state => (
+                            {Object.keys(indianStates).sort().map(state => (
                                 <SelectItem key={state} value={state}>{state}</SelectItem>
                             ))}
                         </SelectContent>
@@ -134,7 +158,7 @@ export default function CropSuggestion() {
                             </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                            {selectedState && indianStates[selectedState as keyof typeof indianStates].map(district => (
+                            {selectedState && indianStates[selectedState as keyof typeof indianStates].sort().map(district => (
                                 <SelectItem key={district} value={district}>{district}</SelectItem>
                             ))}
                         </SelectContent>
