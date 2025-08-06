@@ -25,6 +25,7 @@ export default function PestDiseaseDetection() {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [description, setDescription] = useState("");
     const [location, setLocation] = useState<string | null>(null);
+    const [isLocating, setIsLocating] = useState(false);
     const [locationError, setLocationError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<DiagnosePlantOutput | null>(null);
@@ -48,22 +49,24 @@ export default function PestDiseaseDetection() {
     
     const requestLocation = () => {
         setLocationError(null);
+        setIsLocating(true);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 async (position) => {
                     const { latitude, longitude } = position.coords;
                     try {
-                        // Using a free, open reverse geocoding API
                         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
                         const data = await response.json();
-                        const city = data.address.city || data.address.town || data.address.village || '';
-                        const state = data.address.state || '';
-                        const country = data.address.country || '';
-                        setLocation(`${city}, ${state}, ${country}`);
+                        const address = data.address;
+                        const locationString = [address.city, address.town, address.village, address.county, address.state, address.country]
+                            .filter(Boolean) // Remove empty or null values
+                            .join(', ');
+                        setLocation(locationString || `${latitude}, ${longitude}`);
                     } catch (error) {
                         console.error("Reverse geocoding failed:", error);
-                        // Fallback to coordinates if geocoding fails
                         setLocation(`${latitude}, ${longitude}`);
+                    } finally {
+                        setIsLocating(false);
                     }
                 },
                 (error) => {
@@ -78,6 +81,7 @@ export default function PestDiseaseDetection() {
                         title: "Location Error",
                         description: message,
                     });
+                    setIsLocating(false);
                 }
             );
         } else {
@@ -88,6 +92,7 @@ export default function PestDiseaseDetection() {
                 title: "Location Error",
                 description: message,
             });
+            setIsLocating(false);
         }
     };
 
@@ -167,10 +172,16 @@ export default function PestDiseaseDetection() {
                         </div>
                         <Input id="file-upload" type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange} accept="image/*" />
 
-                         <Button onClick={requestLocation} variant="outline">
+                         <Button onClick={requestLocation} variant="outline" disabled={isLocating}>
                             <LocateFixed className="mr-2 h-4 w-4" />
-                            {location ? `Location: ${location}` : "Get Current Location"}
+                            {isLocating ? "Getting Location..." : (location ? "Update Location" : "Get Current Location")}
                         </Button>
+                        
+                        {location && !isLocating && (
+                             <div className="text-xs text-center text-muted-foreground p-2 bg-muted rounded-md">
+                                <strong>Detected Location:</strong> {location}
+                             </div>
+                        )}
 
                          {locationError && (
                             <Alert variant="destructive">
