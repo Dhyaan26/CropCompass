@@ -1,3 +1,4 @@
+
 {
     "header": {
         "tagline": "Your Smart Farming Assistant",
@@ -18,7 +19,8 @@
         "govtSchemes": "Govt. Schemes",
         "dataInsights": "Data Insights",
         "dashboard": "Dashboard",
-        "aiAssistant": "AI Assistant"
+        "aiAssistant": "AI Assistant",
+        "pestDetection": "Pest Detection"
     },
     "cropSuggestion": {
         "title": "Soil & Crop Recommendations",
@@ -112,6 +114,32 @@
             "description": "Here are the AI-powered insights from your data."
         }
     },
+    "pestDetection": {
+        "title": "Pest & Disease Detection",
+        "description": "Upload a photo of a plant to detect diseases or pests and get treatment suggestions.",
+        "dropzone": "Click or drag & drop a plant photo here.",
+        "descriptionPlaceholder": "Optionally, describe any observed symptoms or issues...",
+        "button": "Diagnose Plant",
+        "analyzing": "Diagnosing...",
+        "results": {
+            "plantIdentification": "Plant Identification",
+            "commonName": "Common Name",
+            "latinName": "Latin Name",
+            "diagnosis": "Diagnosis",
+            "healthStatus": "Health Status",
+            "healthy": "Healthy",
+            "unhealthy": "Unhealthy",
+            "detectedIssue": "Detected Issue",
+            "confidence": "Confidence",
+            "symptoms": "Symptoms",
+            "treatment": "Treatment Suggestions",
+            "organicMethods": "Organic Methods",
+            "chemicalMethods": "Chemical Methods",
+            "prevention": "Prevention Tips",
+            "noPlant": "Plant Not Detected",
+            "noPlantDesc": "The AI could not confirm that the uploaded image contains a plant. Please try another photo."
+        }
+    },
     "chatAssistant": {
         "title": "AI Farming Assistant",
         "description": "Ask me anything about farming!",
@@ -127,6 +155,7 @@
         "yieldPredictionError": "Failed to predict yield. Please try again.",
         "govtSchemesError": "Failed to find government schemes. Please try again.",
         "aiInsightsError": "Failed to analyze data. Please try again.",
+        "pestDetectionError": "Failed to diagnose plant. Please check the image and try again.",
         "fileSelectError": "Please select a file to analyze.",
         "chatAssistantError": "Failed to get a response from the assistant. Please try again."
     }

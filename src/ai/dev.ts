@@ -7,3 +7,4 @@ import '@/ai/flows/predict-yield.ts';
 import '@/ai/flows/analyze-farm-data.ts';
 import '@/ai/flows/find-govt-schemes.ts';
 import '@/ai/flows/chat-assistant.ts';
+import '@/ai/flows/diagnose-plant.ts';

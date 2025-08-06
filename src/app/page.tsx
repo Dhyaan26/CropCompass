@@ -9,7 +9,8 @@ import YieldPrediction from '@/components/yield-prediction';
 import ChatWidget from '@/components/chat-widget';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useTranslation } from '@/hooks/use-translation';
-import { BarChartBig, Droplets, Landmark, LineChart, Trees } from 'lucide-react';
+import { BarChartBig, Droplets, Landmark, LineChart, Trees, Bug } from 'lucide-react';
+import PestDiseaseDetection from '@/components/pest-disease-detection';
 
 export default function Home() {
   const { t } = useTranslation();
@@ -20,6 +21,7 @@ export default function Home() {
       { value: "yield-prediction", icon: LineChart, label: t('tabs.yieldPrediction'), component: <YieldPrediction /> },
       { value: "govt-schemes", icon: Landmark, label: t('tabs.govtSchemes'), component: <GovtSchemes /> },
       { value: "data-insights", icon: BarChartBig, label: t('tabs.dataInsights'), component: <AiInsights /> },
+      { value: "pest-detection", icon: Bug, label: t('tabs.pestDetection'), component: <PestDiseaseDetection /> },
   ];
 
   return (
@@ -35,7 +37,7 @@ export default function Home() {
                 </p>
             </div>
             <Tabs defaultValue="crop-suggestions" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-5 h-auto">
+                <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto">
                     {features.map((feature) => (
                         <TabsTrigger value={feature.value} key={feature.value} className="flex flex-col sm:flex-row gap-2 h-auto py-2">
                             <feature.icon className="h-5 w-5" />
