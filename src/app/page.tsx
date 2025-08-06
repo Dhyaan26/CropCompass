@@ -52,29 +52,34 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="tools" className="container mx-auto py-12 md:py-24">
-            <div className="mb-8 text-center">
-                <h2 className="mb-2 text-3xl font-bold text-primary/90 font-headline md:text-4xl">
-                    {t('dashboard.title')}
-                </h2>
-            </div>
+        <section id="tools" className="py-12 md:py-24 bg-muted/40">
+            <div className="container mx-auto">
+                <div className="mb-12 text-center">
+                    <h2 className="mb-2 text-3xl font-bold text-primary/90 font-headline md:text-4xl">
+                        {t('dashboard.title')}
+                    </h2>
+                    <p className="text-muted-foreground max-w-2xl mx-auto">
+                        Explore our suite of AI-powered tools designed to help you make smarter farming decisions.
+                    </p>
+                </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {features.map((feature, index) => (
-                    <Link href={feature.href} key={index} className="rounded-lg transition-transform transform hover:scale-105">
-                        <Card className="shadow-lg hover:shadow-xl transition-shadow h-full">
-                            <CardHeader className="flex-row items-center gap-4">
-                                <feature.icon className="h-10 w-10 text-accent" />
-                                <CardTitle>{feature.text}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <CardDescription>
-                                    {feature.description}
-                                </CardDescription>
-                            </CardContent>
-                        </Card>
-                    </Link>
-                ))}
+                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {features.map((feature, index) => (
+                        <Link href={feature.href} key={index} className="group block">
+                            <Card className="shadow-lg hover:shadow-xl transition-all duration-300 h-full border-transparent hover:border-primary/50 group-hover:scale-105">
+                                <CardHeader className="flex-row items-center gap-4">
+                                    <feature.icon className="h-10 w-10 text-accent" />
+                                    <CardTitle className="group-hover:text-primary">{feature.text}</CardTitle>
+                                </CardHeader>
+                                <CardContent>
+                                    <CardDescription>
+                                        {feature.description}
+                                    </CardDescription>
+                                </CardContent>
+                            </Card>
+                        </Link>
+                    ))}
+                </div>
             </div>
         </section>
 
