@@ -207,8 +207,9 @@
         "button": "डेटा का विश्लेषण करें",
         "analyzing": "विश्लेषण हो रहा है...",
         "results": {
-            "title": "डेटा विश्लेषण परिणाम",
-            "description": "यहाँ आपके डेटा से एआई-संचालित अंतर्दृष्टि दी गई है।"
+            "summaryTitle": "सारांश",
+            "insightsTitle": "मुख्य अंतर्दृष्टि",
+            "recommendationsTitle": "कार्रवाई योग्य सिफारिशें"
         }
     },
     "pestDetection": {

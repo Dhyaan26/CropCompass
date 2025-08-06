@@ -207,8 +207,9 @@
         "button": "ಡೇಟಾವನ್ನು ವಿಶ್ಲೇಷಿಸಿ",
         "analyzing": "ವಿಶ್ಲೇಷಿಸಲಾಗುತ್ತಿದೆ...",
         "results": {
-            "title": "ಡೇಟಾ ವಿಶ್ಲೇಷಣೆ ಫಲಿತಾಂಶಗಳು",
-            "description": "ನಿಮ್ಮ ಡೇಟಾದಿಂದ AI-ಚಾಲಿತ ಒಳನೋಟಗಳು ಇಲ್ಲಿವೆ."
+            "summaryTitle": "ಸಾರಾಂಶ",
+            "insightsTitle": "ಪ್ರಮುಖ ಒಳನೋಟಗಳು",
+            "recommendationsTitle": "ಕಾರ್ಯಸಾಧ್ಯವಾದ ಶಿಫಾರಸುಗಳು"
         }
     },
      "pestDetection": {

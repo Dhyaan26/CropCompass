@@ -22,7 +22,9 @@ const AnalyzeFarmDataInputSchema = z.object({
 export type AnalyzeFarmDataInput = z.infer<typeof AnalyzeFarmDataInputSchema>;
 
 const AnalyzeFarmDataOutputSchema = z.object({
-  analysis: z.string().describe('A detailed analysis of the farm data, including insights on yields, costs, and risks.'),
+  summary: z.string().describe('A brief, one-paragraph summary of the key findings from the data.'),
+  keyInsights: z.array(z.string()).describe('A list of 3-5 bullet-point insights on yields, costs, and profitability.'),
+  recommendations: z.array(z.string()).describe('A list of 3-5 actionable recommendations to improve farm performance.'),
 });
 export type AnalyzeFarmDataOutput = z.infer<typeof AnalyzeFarmDataOutputSchema>;
 
@@ -34,7 +36,12 @@ const prompt = ai.definePrompt({
   name: 'analyzeFarmDataPrompt',
   input: {schema: AnalyzeFarmDataInputSchema},
   output: {schema: AnalyzeFarmDataOutputSchema},
-  prompt: `You are an expert agricultural data analyst. Analyze the following farm data from the file '{{{fileName}}}' and provide a detailed analysis. Focus on providing actionable insights regarding crop yields, operational costs, and potential risks.
+  prompt: `You are an expert agricultural data analyst. Analyze the following farm data from the file '{{{fileName}}}'. Your goal is to provide a clear, concise, and easily understandable analysis. Avoid overly long text.
+
+Your analysis must include:
+1.  A brief **Summary** of the overall findings.
+2.  A list of 3-5 crucial **Key Insights** (e.g., "Highest-cost operation is X," "Crop A is 20% more profitable than Crop B").
+3.  A list of 3-5 actionable **Recommendations** (e.g., "Consider reducing fertilizer usage for Crop C," "Explore market options for Crop A").
 
 Provide the entire response in the following language: {{{language}}}.
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { UploadCloud, FileText, Loader2, BrainCircuit } from 'lucide-react';
+import { UploadCloud, FileText, Loader2, BrainCircuit, Lightbulb, CheckCircle } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import {
     analyzeFarmData,
@@ -108,18 +108,45 @@ export default function AiInsights() {
                 </div>
 
                 {result && (
-                     <Card className="mt-8">
-                        <CardHeader className="flex flex-row items-center gap-4">
-                            <BrainCircuit className="h-8 w-8 text-accent" />
-                            <div>
-                                <CardTitle>{t('aiInsights.results.title')}</CardTitle>
-                                <CardDescription>{t('aiInsights.results.description')}</CardDescription>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="whitespace-pre-wrap text-muted-foreground">{result.analysis}</p>
-                        </CardContent>
-                    </Card>
+                     <div className="mt-8 space-y-6">
+                        <Card>
+                            <CardHeader className="flex flex-row items-center gap-4">
+                                <BrainCircuit className="h-8 w-8 text-accent" />
+                                <div>
+                                    <CardTitle>{t('aiInsights.results.summaryTitle')}</CardTitle>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-muted-foreground">{result.summary}</p>
+                            </CardContent>
+                        </Card>
+                         <Card>
+                            <CardHeader className="flex flex-row items-center gap-4">
+                                <Lightbulb className="h-8 w-8 text-accent" />
+                                <div>
+                                    <CardTitle>{t('aiInsights.results.insightsTitle')}</CardTitle>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                               <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                                    {result.keyInsights.map((insight, index) => <li key={index}>{insight}</li>)}
+                               </ul>
+                            </CardContent>
+                        </Card>
+                         <Card>
+                            <CardHeader className="flex flex-row items-center gap-4">
+                                <CheckCircle className="h-8 w-8 text-accent" />
+                                <div>
+                                    <CardTitle>{t('aiInsights.results.recommendationsTitle')}</CardTitle>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                                    {result.recommendations.map((rec, index) => <li key={index}>{rec}</li>)}
+                                </ul>
+                            </CardContent>
+                        </Card>
+                     </div>
                 )}
             </CardContent>
         </Card>

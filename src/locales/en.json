@@ -208,8 +208,9 @@
         "button": "Analyze Data",
         "analyzing": "Analyzing...",
         "results": {
-            "title": "Data Analysis Results",
-            "description": "Here are the AI-powered insights from your data."
+            "summaryTitle": "Summary",
+            "insightsTitle": "Key Insights",
+            "recommendationsTitle": "Actionable Recommendations"
         }
     },
     "pestDetection": {
