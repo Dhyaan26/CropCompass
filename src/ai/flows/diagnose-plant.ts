@@ -17,8 +17,14 @@ const DiagnosePlantInputSchema = z.object({
       "A photo of a plant, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
     ),
   description: z.string().describe('The description of the plant problem.'),
+  location: z.string().describe('The user\'s current location (e.g., city, district) for finding nearby stores.'),
 });
 export type DiagnosePlantInput = z.infer<typeof DiagnosePlantInputSchema>;
+
+const TreatmentSchema = z.object({
+    method: z.string().describe('The name of the treatment method or product.'),
+    priceRange: z.string().describe('The estimated price range for this treatment (e.g., "₹500 - ₹800"). "N/A" if not applicable.'),
+});
 
 const DiagnosePlantOutputSchema = z.object({
   identification: z.object({
@@ -33,10 +39,11 @@ const DiagnosePlantOutputSchema = z.object({
     description: z.string().describe('A detailed description of the disease or pest and its symptoms.'),
   }),
   treatment: z.object({
-    organic: z.array(z.string()).describe('A list of organic treatment suggestions.'),
-    chemical: z.array(z.string()).describe('A list of chemical treatment suggestions.'),
+    organic: z.array(TreatmentSchema).describe('A list of organic treatment suggestions with price ranges.'),
+    chemical: z.array(TreatmentSchema).describe('A list of chemical treatment suggestions with price ranges.'),
   }),
   prevention: z.array(z.string()).describe('A list of tips to prevent this issue in the future.'),
+  googleMapsSearchLink: z.string().describe("A Google Maps URL that searches for 'agricultural supply stores' in the user's provided location. Will be an empty string if no disease is detected."),
 });
 export type DiagnosePlantOutput = z.infer<typeof DiagnosePlantOutputSchema>;
 
@@ -48,14 +55,16 @@ const prompt = ai.definePrompt({
   name: 'diagnosePlantPrompt',
   input: {schema: DiagnosePlantInputSchema},
   output: {schema: DiagnosePlantOutputSchema},
-  prompt: `You are an expert plant pathologist and botanist. Your task is to analyze an image of a plant and a user-provided description to identify the plant, diagnose any diseases or pests, and recommend treatments and prevention methods.
+  prompt: `You are an expert plant pathologist and botanist specializing in Indian agriculture. Your task is to analyze an image of a plant, a user-provided description, and their location to identify the plant, diagnose any diseases or pests, and recommend treatments.
 
 Analyze the provided image and description.
 1.  **Identification**: First, confirm if the image contains a plant. If it does, identify its common and Latin names.
 2.  **Diagnosis**: Determine if the plant is healthy. If not, identify the disease or pest. State your confidence in this diagnosis. Provide a detailed description of the symptoms and the identified issue.
-3.  **Treatment**: Suggest specific organic and chemical treatment methods.
+3.  **Treatment**: Suggest specific organic and chemical treatment methods. For each method/pesticide, provide an estimated price range in Indian Rupees (₹).
 4.  **Prevention**: Provide actionable tips to prevent the problem from recurring.
+5.  **Find Stores**: If a disease or pest is identified, create a Google Maps search link for "agricultural supply stores" in the user's location. The URL should be in the format: \`https://www.google.com/maps/search/?api=1&query=agricultural+supply+stores+in+<LOCATION>\`. Replace <LOCATION> with the user's location.
 
+User's Location: {{{location}}}
 User's Description: {{{description}}}
 Plant Photo: {{media url=photoDataUri}}`,
 });

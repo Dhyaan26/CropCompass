@@ -152,6 +152,7 @@
         "title": "Pest & Disease Detection",
         "description": "Upload a photo of a plant to detect diseases or pests and get treatment suggestions.",
         "dropzone": "Click or drag & drop a plant photo here.",
+        "locationPlaceholder": "Enter your location (e.g., City, District)",
         "descriptionPlaceholder": "Optionally, describe any observed symptoms or issues...",
         "button": "Diagnose Plant",
         "analyzing": "Diagnosing...",
@@ -171,7 +172,8 @@
             "chemicalMethods": "Chemical Methods",
             "prevention": "Prevention Tips",
             "noPlant": "Plant Not Detected",
-            "noPlantDesc": "The AI could not confirm that the uploaded image contains a plant. Please try another photo."
+            "noPlantDesc": "The AI could not confirm that the uploaded image contains a plant. Please try another photo.",
+            "findStores": "Find Nearby Stores"
         }
     },
     "marketPrice": {
@@ -206,6 +208,7 @@
         "aiInsightsError": "Failed to analyze data. Please try again.",
         "pestDetectionError": "Failed to diagnose plant. Please check the image and try again.",
         "fileSelectError": "Please select a file to analyze.",
+        "locationRequiredError": "Please enter your location.",
         "chatAssistantError": "Failed to get a response from the assistant. Please try again.",
         "marketPriceError": "Failed to get market price. Please try again."
     }

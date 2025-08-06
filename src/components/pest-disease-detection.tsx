@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { UploadCloud, Loader2, Microscope, TestTube, ShieldCheck, Leaf, AlertTriangle } from 'lucide-react';
+import { UploadCloud, Loader2, Microscope, TestTube, ShieldCheck, Leaf, AlertTriangle, MapPin } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import {
     diagnosePlant,
@@ -16,12 +16,14 @@ import {
 import { useTranslation } from '@/hooks/use-translation';
 import { Textarea } from './ui/textarea';
 import { Badge } from './ui/badge';
+import Link from 'next/link';
 
 export default function PestDiseaseDetection() {
     const { t } = useTranslation();
     const [file, setFile] = useState<File | null>(null);
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
     const [description, setDescription] = useState("");
+    const [location, setLocation] = useState("");
     const [loading, setLoading] = useState(false);
     const [result, setResult] = useState<DiagnosePlantOutput | null>(null);
     const { toast } = useToast();
@@ -51,6 +53,14 @@ export default function PestDiseaseDetection() {
             });
             return;
         }
+        if (!location) {
+            toast({
+                variant: "destructive",
+                title: t('toasts.error'),
+                description: t('toasts.locationRequiredError'),
+            });
+            return;
+        }
 
         setLoading(true);
         setResult(null);
@@ -59,6 +69,7 @@ export default function PestDiseaseDetection() {
             const input: DiagnosePlantInput = {
                 description: description,
                 photoDataUri: previewUrl,
+                location: location,
             };
             const response = await diagnosePlant(input);
             setResult(response);
@@ -73,6 +84,15 @@ export default function PestDiseaseDetection() {
             setLoading(false);
         }
     };
+    
+    const renderTreatmentMethods = (methods: { method: string; priceRange: string }[]) => (
+        <ul className="list-disc pl-5 mt-2 space-y-1 text-muted-foreground">
+            {methods.map((item, i) => (
+                <li key={i}>{item.method} ({item.priceRange})</li>
+            ))}
+        </ul>
+    );
+
 
     return (
         <Card className="shadow-lg w-full max-w-4xl mx-auto">
@@ -100,14 +120,20 @@ export default function PestDiseaseDetection() {
                         </div>
                         <Input id="file-upload" type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange} accept="image/*" />
 
+                        <Input 
+                            placeholder={t('pestDetection.locationPlaceholder')}
+                            value={location}
+                            onChange={(e) => setLocation(e.target.value)}
+                        />
+
                         <Textarea
                             placeholder={t('pestDetection.descriptionPlaceholder')}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            rows={4}
+                            rows={3}
                         />
 
-                        <Button className="w-full" disabled={!file || loading} onClick={handleAnalyze}>
+                        <Button className="w-full" disabled={!file || !location || loading} onClick={handleAnalyze}>
                             {loading ? (
                                 <>
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -171,16 +197,22 @@ export default function PestDiseaseDetection() {
                                 <CardContent className="space-y-4 text-sm">
                                     <div>
                                         <h4 className="font-semibold">{t('pestDetection.results.organicMethods')}</h4>
-                                        <ul className="list-disc pl-5 mt-2 space-y-1 text-muted-foreground">
-                                            {result.treatment.organic.map((method, i) => <li key={i}>{method}</li>)}
-                                        </ul>
+                                        {renderTreatmentMethods(result.treatment.organic)}
                                     </div>
                                     <div>
                                         <h4 className="font-semibold">{t('pestDetection.results.chemicalMethods')}</h4>
-                                        <ul className="list-disc pl-5 mt-2 space-y-1 text-muted-foreground">
-                                            {result.treatment.chemical.map((method, i) => <li key={i}>{method}</li>)}
-                                        </ul>
+                                        {renderTreatmentMethods(result.treatment.chemical)}
                                     </div>
+                                     {result.googleMapsSearchLink && (
+                                        <div className="pt-4">
+                                            <Button asChild>
+                                                <Link href={result.googleMapsSearchLink} target="_blank" rel="noopener noreferrer">
+                                                    <MapPin className="mr-2 h-4 w-4" />
+                                                    {t('pestDetection.results.findStores')}
+                                                </Link>
+                                            </Button>
+                                        </div>
+                                    )}
                                 </CardContent>
                             </Card>
                         )}
