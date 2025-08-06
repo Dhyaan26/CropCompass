@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -16,11 +16,11 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, CalendarClock, Recycle, Droplets } from "lucide-react";
+import { Loader2, CalendarClock, Recycle, Droplets, Forward } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calendar } from "./ui/calendar";
-import { addDays, format } from "date-fns";
+import { addDays, format, parse, isAfter, startOfToday } from "date-fns";
 
 const soilTypes = [
     "Alluvial Soil",
@@ -42,7 +42,7 @@ const formSchema = z.object({
 });
 
 type ScheduleEntry = {
-    date: Date;
+    date: string;
     task: string;
 };
 
@@ -53,6 +53,7 @@ export default function IrrigationPlan() {
   const [selectedState, setSelectedState] = useState<string>("");
   const { toast } = useToast();
   const [selectedDay, setSelectedDay] = useState<Date | undefined>(new Date());
+  const [nextWateringDay, setNextWateringDay] = useState<ScheduleEntry | null>(null);
   
   const indianStates = t('indianStates') as any;
 
@@ -65,12 +66,24 @@ export default function IrrigationPlan() {
   });
   
   const scheduleMap = result?.schedule.reduce((acc, item) => {
-    // The date from AI is YYYY-MM-DD, but JS Date constructor treats it as UTC.
-    // To avoid timezone issues, append T00:00:00 to treat it as local time.
     const date = new Date(`${item.date}T00:00:00`);
     acc.set(format(date, 'yyyy-MM-dd'), item.task);
     return acc;
   }, new Map<string, string>());
+  
+  useEffect(() => {
+    if (result?.schedule) {
+      const today = startOfToday();
+      const nextDay = result.schedule
+        .map(item => ({...item, parsedDate: parse(item.date, 'yyyy-MM-dd', new Date())}))
+        .sort((a, b) => a.parsedDate.getTime() - b.parsedDate.getTime())
+        .find(item => isAfter(item.parsedDate, today) || format(item.parsedDate, 'yyyy-MM-dd') === format(today, 'yyyy-MM-dd'));
+      
+      setNextWateringDay(nextDay || null);
+    } else {
+      setNextWateringDay(null);
+    }
+  }, [result]);
 
 
   const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = async (data) => {
@@ -262,6 +275,20 @@ export default function IrrigationPlan() {
                 </CardContent>
              </Card>
              <div className="space-y-8">
+                {nextWateringDay && (
+                    <Card>
+                        <CardHeader className="flex flex-row items-center gap-4">
+                            <Forward className="h-8 w-8 text-accent" />
+                            <div>
+                                <CardTitle>{t('irrigationPlan.results.nextWatering')}</CardTitle>
+                                <CardDescription>{format(new Date(`${nextWateringDay.date}T00:00:00`), 'PPP')}</CardDescription>
+                            </div>
+                        </CardHeader>
+                         <CardContent>
+                            <p className="text-sm text-muted-foreground">{nextWateringDay.task}</p>
+                        </CardContent>
+                    </Card>
+                )}
                 <Card>
                     <CardHeader className="flex flex-row items-center gap-4">
                         <Droplets className="h-8 w-8 text-accent" />

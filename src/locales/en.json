@@ -116,7 +116,8 @@
             "conservationDesc": "Techniques to help you save water.",
             "legend": "Calendar Legend",
             "wateringDay": "Watering Day",
-            "noTask": "No watering task for this day."
+            "noTask": "No watering task for this day.",
+            "nextWatering": "Next Watering Day"
         }
     },
     "yieldPrediction": {
