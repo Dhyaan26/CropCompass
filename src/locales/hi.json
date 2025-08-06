@@ -187,7 +187,8 @@
         "results": {
             "averagePrice": "औसत मूल्य",
             "marketTrends": "बाजार के रुझान",
-            "priceFactors": "मूल्य को प्रभावित करने वाले कारक"
+            "priceFactors": "मूल्य को प्रभावित करने वाले कारक",
+            "findStores": "आस-पास की दुकानें ढूंढें"
         }
     },
     "chatAssistant": {

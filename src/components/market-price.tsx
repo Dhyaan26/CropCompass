@@ -15,7 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, IndianRupee, TrendingUp, Lightbulb, ExternalLink, ShoppingCart } from "lucide-react";
+import { Loader2, IndianRupee, TrendingUp, Lightbulb, ExternalLink, ShoppingCart, MapPin } from "lucide-react";
 import { useTranslation } from "@/hooks/use-translation";
 import Link from "next/link";
 
@@ -142,24 +142,43 @@ export default function MarketPrice() {
               </CardContent>
             </Card>
 
-            <Card>
-                <CardHeader className="flex flex-row items-center gap-4">
-                    <ExternalLink className="h-8 w-8 text-accent" />
-                    <div>
-                    <CardTitle>Live Market Data</CardTitle>
-                    <CardDescription>Check live prices from APMC markets.</CardDescription>
-                    </div>
-                </CardHeader>
-                <CardContent>
-                    <Button asChild>
-                        <Link href={result.liveMarketLink} target="_blank" rel="noopener noreferrer">
-                            Search Live Prices
-                            <ExternalLink className="ml-2 h-4 w-4" />
-                        </Link>
-                    </Button>
-                </CardContent>
-            </Card>
-
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card>
+                  <CardHeader className="flex flex-row items-center gap-4">
+                      <ExternalLink className="h-8 w-8 text-accent" />
+                      <div>
+                      <CardTitle>Live Market Data</CardTitle>
+                      <CardDescription>Check live prices from APMC markets.</CardDescription>
+                      </div>
+                  </CardHeader>
+                  <CardContent>
+                      <Button asChild>
+                          <Link href={result.liveMarketLink} target="_blank" rel="noopener noreferrer">
+                              Search Live Prices
+                              <ExternalLink className="ml-2 h-4 w-4" />
+                          </Link>
+                      </Button>
+                  </CardContent>
+              </Card>
+              <Card>
+                  <CardHeader className="flex flex-row items-center gap-4">
+                      <MapPin className="h-8 w-8 text-accent" />
+                      <div>
+                      <CardTitle>{t('marketPrice.results.findStores')}</CardTitle>
+                      <CardDescription>Find sellers in your area.</CardDescription>
+                      </div>
+                  </CardHeader>
+                  <CardContent>
+                      <Button asChild>
+                          <Link href={result.googleMapsSearchLink} target="_blank" rel="noopener noreferrer">
+                              Find Nearby Stores
+                              <ExternalLink className="ml-2 h-4 w-4" />
+                          </Link>
+                      </Button>
+                  </CardContent>
+              </Card>
+            </div>
+            
             <Card>
                 <CardHeader className="flex flex-row items-center gap-4">
                     <ShoppingCart className="h-8 w-8 text-accent" />

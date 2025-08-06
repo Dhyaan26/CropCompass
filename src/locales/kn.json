@@ -187,7 +187,8 @@
         "results": {
             "averagePrice": "ಸರಾಸರಿ ಬೆಲೆ",
             "marketTrends": "ಮಾರುಕಟ್ಟೆ ಪ್ರವೃತ್ತಿಗಳು",
-            "priceFactors": "ಬೆಲೆ ಪ್ರಭಾವ ಬೀರುವ ಅಂಶಗಳು"
+            "priceFactors": "ಬೆಲೆ ಪ್ರಭಾವ ಬೀರುವ ಅಂಶಗಳು",
+            "findStores": "ಹತ್ತಿರದ ಅಂಗಡಿಗಳನ್ನು ಹುಡುಕಿ"
         }
     },
      "chatAssistant": {

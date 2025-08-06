@@ -188,7 +188,8 @@
         "results": {
             "averagePrice": "Average Price",
             "marketTrends": "Market Trends",
-            "priceFactors": "Price Influencing Factors"
+            "priceFactors": "Price Influencing Factors",
+            "findStores": "Find Nearby Stores"
         }
     },
     "chatAssistant": {

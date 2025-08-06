@@ -23,6 +23,7 @@ const GetMarketPriceOutputSchema = z.object({
   marketTrends: z.string().describe('A brief analysis of the current market trends for this product.'),
   priceFactors: z.string().describe('Key factors influencing the price (e.g., demand, supply, weather).'),
   liveMarketLink: z.string().describe("A Google search URL for the APMC market price of the product in the specified location. The URL should be in the format: `https://www.google.com/search?q=APMC+<LOCATION>+<PRODUCT>+price`"),
+  googleMapsSearchLink: z.string().describe("A Google Maps URL that searches for 'agricultural supply stores' in the user's provided location. The URL should be in the format: `https://www.google.com/maps/search/?api=1&query=agricultural+supply+stores+in+<LOCATION>`."),
   ecommerceLinks: z.array(z.object({
     siteName: z.string().describe("The name of the e-commerce website (e.g., 'Amazon', 'Flipkart', 'BigBasket')."),
     searchUrl: z.string().describe("A URL to search for the product on that e-commerce site."),
@@ -45,7 +46,8 @@ Based on the user's query, provide the following information:
 2.  **Market Trends**: A brief analysis of current market trends (e.g., "Prices are currently stable but expected to rise next month due to festival demand.").
 3.  **Price Factors**: Key factors currently influencing the price.
 4.  **Live Market Link**: Generate a Google search URL to find the live APMC market price for the specified product and location.
-5.  **E-commerce Links**: Generate product search URLs for at least 3 major Indian e-commerce websites (like Amazon.in, Flipkart, BigBasket) where the user might be able to buy the product.
+5.  **Nearby Stores Link**: Generate a Google Maps search URL for "agricultural supply stores" in the user's location.
+6.  **E-commerce Links**: Generate product search URLs for at least 3 major Indian e-commerce websites (like Amazon.in, Flipkart, BigBasket) where the user might be able to buy the product.
 
 Product: {{{productName}}}
 Location: {{{location}}}
